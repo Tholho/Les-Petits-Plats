@@ -1,0 +1,106 @@
+.anton {
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/*
+.manrope-default {
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+*/
+body {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+header {
+  position: relative;
+  max-width: 1440px;
+}
+header .logo {
+  margin: 0;
+  display: flex;
+  position: absolute;
+  left: 69px;
+  top: 51px;
+  color: white;
+  z-index: 1;
+  align-items: center;
+}
+header .logo * {
+  margin: 0;
+}
+header .logo h1 {
+  font-size: 1.75rem;
+  letter-spacing: 0.5px;
+  margin-right: 2px;
+}
+
+.sectionTop {
+  position: relative;
+}
+.sectionTop__background-img {
+  height: 667px;
+  width: 100%;
+  object-fit: cover;
+  filter: brightness(70%);
+}
+.sectionTop__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  width: 66%;
+}
+.sectionTop__hero {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 30px;
+  font-size: 2.75rem;
+  text-align: center;
+  color: #ffd15b;
+}
+.sectionTop__form-field {
+  position: relative;
+  display: flex;
+}
+.sectionTop__form-field input {
+  width: 100%;
+  border-radius: 12px;
+  font-size: 1rem;
+  padding: 26px;
+  color: #7a7a7a;
+  caret-color: transparent;
+}
+.sectionTop__form-field .svg__group {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 0px;
+}
+.sectionTop__form-field .svg__clear {
+  display: none;
+  margin-right: 15px;
+}
+.sectionTop__form-field .svg__search {
+  padding: 11px;
+}
+.sectionTop__form-field .svg__search * {
+  transition: all 0.3s;
+}
+.sectionTop__form-field .svg__search:hover rect {
+  fill: #ffd15b;
+}
+.sectionTop__form-field .svg__search:hover circle,
+.sectionTop__form-field .svg__search:hover line {
+  stroke: black;
+}
+
+/*# sourceMappingURL=styles.css.map */

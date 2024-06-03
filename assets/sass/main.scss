@@ -1,0 +1,125 @@
+$yellow: #ffd15b;
+$grey: #7a7a7a;
+
+* {
+    // border: 2px solid red;
+}
+
+.anton {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+// <uniquifier>: Use a unique and descriptive class name
+// <weight>: Use a value from 200 to 800
+
+/*
+.manrope-default {
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+*/
+
+body {
+    margin: 0;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+header {
+    position: relative;
+    max-width: 1440px;
+    .logo {
+        margin: 0;
+        display: flex;
+        position: absolute;
+        left: 69px;
+        top: 51px;
+        color: white;
+        z-index: 1;
+        align-items: center;
+        * {
+            margin: 0;
+        }
+        h1 {
+            font-size: 1.75rem;
+            letter-spacing: 0.5px;
+            margin-right: 2px;
+        }
+    }
+}
+
+main {
+}
+
+section {
+}
+
+.sectionTop {
+    position: relative;
+    &__background-img {
+        height: 667px;
+        width: 100%;
+        object-fit: cover;
+        filter: brightness(70%);
+    }
+    &__content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        width: 66%;
+    }
+    &__hero {
+        width: 80%;
+        margin: auto;
+        margin-bottom: 30px;
+        font-size: 2.75rem;
+        text-align: center;
+        color: $yellow;
+    }
+    &__form-container {
+    }
+    &__form-field {
+        position: relative;
+        display: flex;
+        input {
+            width: 100%;
+            border-radius: 12px;
+            font-size: 1rem;
+            padding: 26px;
+            color: $grey;
+            caret-color: transparent;
+        }
+        .svg__group {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            right: 0px;
+        }
+        .svg__clear {
+            display: none;
+            margin-right: 15px;
+        }
+        .svg__search {
+            padding: 11px;
+            * {
+                transition: all 0.3s;
+            }
+            &:hover {
+                rect {
+                    fill: $yellow;
+                }
+                circle,
+                line {
+                    stroke: black;
+                }
+            }
+        }
+    }
+}
