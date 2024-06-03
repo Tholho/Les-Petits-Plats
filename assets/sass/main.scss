@@ -132,6 +132,7 @@ section {
 }
 
 .sectionRecipes__header {
+    position: relative;
     display: flex;
     justify-content: space-between;
     padding: 30px;
@@ -142,13 +143,30 @@ section {
 .sortingGroup {
     justify-self: start;
     display: flex;
+    position: absolute;
     &__customDropdown {
+        background-color: white;
+        border-radius: 15px;
         margin-right: 40px;
-        position: relative;
+        max-height: 60px;
+        overflow-y: scroll;
+        transition: all 0.7s;
+        .sortingList {
+            transition: all 0.5s ease-in-out;
+            opacity: 0;
+        }
+        &.displayed {
+            max-height: 300px;
+            .sortingList {
+                opacity: 1;
+            }
+        }
     }
 }
 
 .dropdownBtn {
+    position: sticky;
+    top: 0;
     display: flex;
     border: none;
     color: black;
@@ -156,7 +174,6 @@ section {
     padding: 5px 20px;
     font-size: 1rem;
     align-items: center;
-    border-radius: 15px;
     p {
         margin-right: 70px;
     }
@@ -165,39 +182,35 @@ section {
     }
 }
 
-.sortingList.displayed {
-    max-height: 250px;
-    visibility: visible;
-}
-
 .sortingList {
-    visibility: hidden;
-    transition: all 0.7s;
-    max-height: 0px;
-    position: absolute;
     box-sizing: border-box;
     width: 100%;
-    display: flex;
-    flex-flow: column;
     list-style: none;
-    background-color: white;
     font-size: 0.875rem;
-    padding: 5px;
+    padding: 0px;
     padding-top: 0px;
     margin-top: 0px;
-    padding-left: 20px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    overflow-y: scroll;
+    margin-bottom: 0px;
+    ul {
+        overflow-y: scroll;
+    }
     li {
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-left: 20px;
+    }
+    li:not(.sortingList__input-field) {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        margin: 0px 0px;
+        &:hover {
+            background-color: $yellow;
+        }
     }
     &__input-field {
         position: sticky;
-        top: 0;
+        top: 61px;
         background-color: white;
         margin-top: 0px;
+        padding-bottom: 15px;
     }
     &__form-field {
         position: relative;
@@ -225,6 +238,8 @@ section {
 }
 
 .sectionRecipes {
+    position: relative;
+    z-index: 1;
     &__cardArea {
         display: flex;
         justify-items: space-around;

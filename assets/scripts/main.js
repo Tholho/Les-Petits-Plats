@@ -5,7 +5,6 @@ function searchFieldClear() {
     (field) =>
       (field.oninput = function () {
         const svgclear = field.parentElement.querySelector(".svg-clear");
-        console.log(field.value);
         if (field.value) {
           svgclear.style.display = "block";
           svgclear.onclick = function () {
@@ -28,11 +27,8 @@ function setupCustomDropdown() {
 
   function displayCustomDropdown(e) {
     const currentDropdown = e.target.closest(".dropdownBtn");
-    const currentList = currentDropdown.nextElementSibling;
-    //  currentList.style.display = "block";
-    currentList.classList.add("displayed");
-    currentDropdown.style.borderBottomLeftRadius = "0px";
-    currentDropdown.style.borderBottomRightRadius = "0px";
+    const customDropdown = e.target.closest(".sortingGroup__customDropdown");
+    customDropdown.classList.add("displayed");
     setAngleUp(currentDropdown);
   }
   function setAngleUp(target) {
@@ -46,23 +42,16 @@ function setupCustomDropdown() {
   async function hideCustomDropdown(e) {
     e.stopPropagation();
     const currentDropdown = e.target.closest(".dropdownBtn");
-    const currentList = e.target.parentNode.nextElementSibling;
-    console.log(currentList);
+    const currentCustomDropdown = e.target.closest(
+      ".sortingGroup__customDropdown",
+    );
     const angle = currentDropdown.querySelector("i");
     const paragraph = currentDropdown.querySelector("p");
-    console.log(currentDropdown);
-    //   currentList.style.display = "none";
-    currentList.classList.remove("displayed");
-    setTimeout(removeBorderRadiuses, 500);
+    currentCustomDropdown.classList.remove("displayed");
     angle.classList.add("fa-angle-down");
     angle.classList.remove("fa-angle-up");
     angle.removeEventListener("click", hideCustomDropdown);
     paragraph.removeEventListener("click", hideCustomDropdown);
-
-    function removeBorderRadiuses() {
-      currentDropdown.style.removeProperty("border-bottom-left-radius");
-      currentDropdown.style.removeProperty("border-bottom-right-radius");
-    }
   }
 }
 
