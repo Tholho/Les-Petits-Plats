@@ -28,7 +28,9 @@ function setupCustomDropdown() {
 
   function displayCustomDropdown(e) {
     const currentDropdown = e.target.closest(".dropdownBtn");
-    currentDropdown.nextElementSibling.style.display = "block";
+    const currentList = currentDropdown.nextElementSibling;
+    //  currentList.style.display = "block";
+    currentList.classList.add("displayed");
     currentDropdown.style.borderBottomLeftRadius = "0px";
     currentDropdown.style.borderBottomRightRadius = "0px";
     setAngleUp(currentDropdown);
@@ -41,7 +43,7 @@ function setupCustomDropdown() {
     angle.addEventListener("click", hideCustomDropdown);
     paragraph.addEventListener("click", hideCustomDropdown);
   }
-  function hideCustomDropdown(e) {
+  async function hideCustomDropdown(e) {
     e.stopPropagation();
     const currentDropdown = e.target.closest(".dropdownBtn");
     const currentList = e.target.parentNode.nextElementSibling;
@@ -49,13 +51,18 @@ function setupCustomDropdown() {
     const angle = currentDropdown.querySelector("i");
     const paragraph = currentDropdown.querySelector("p");
     console.log(currentDropdown);
-    currentList.style.display = "none";
-    currentDropdown.style.removeProperty("border-bottom-left-radius");
-    currentDropdown.style.removeProperty("border-bottom-right-radius");
+    //   currentList.style.display = "none";
+    currentList.classList.remove("displayed");
+    setTimeout(removeBorderRadiuses, 500);
     angle.classList.add("fa-angle-down");
     angle.classList.remove("fa-angle-up");
     angle.removeEventListener("click", hideCustomDropdown);
     paragraph.removeEventListener("click", hideCustomDropdown);
+
+    function removeBorderRadiuses() {
+      currentDropdown.style.removeProperty("border-bottom-left-radius");
+      currentDropdown.style.removeProperty("border-bottom-right-radius");
+    }
   }
 }
 

@@ -136,8 +136,14 @@ header .logo h1 {
   margin-right: 0px;
 }
 
+.sortingList.displayed {
+  max-height: 250px;
+  visibility: visible;
+}
+
 .sortingList {
-  transition: all 0.4s;
+  visibility: hidden;
+  transition: all 0.7s;
   max-height: 0px;
   position: absolute;
   box-sizing: border-box;
@@ -145,7 +151,6 @@ header .logo h1 {
   display: flex;
   flex-flow: column;
   list-style: none;
-  display: none;
   background-color: white;
   font-size: 0.875rem;
   padding: 5px;
@@ -155,9 +160,6 @@ header .logo h1 {
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   overflow-y: scroll;
-}
-.sortingList.displayed {
-  max-height: 250px;
 }
 .sortingList li {
   padding-top: 10px;
