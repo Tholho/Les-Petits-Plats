@@ -10,6 +10,13 @@
             href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200..800&display=swap"
             rel="stylesheet"
         />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
         <script src="assets/scripts/main.js" defer></script>
         <title>Les petits plats</title>
     </head>
@@ -58,68 +65,236 @@
                         CHERCHEZ PARMI PLUS DE 1500 RECETTES DU
                         QUOTIDIEN,SIMPLES ET DÉLICIEUSES
                     </h1>
-                    <div class="sectionTop__form-container">
-                        <form class="sectionTop__form" method="get">
-                            <div class="sectionTop__form-field">
-                                <label for="field"></label>
-                                <input
-                                    type="text"
-                                    name="field"
-                                    id="field"
-                                    placeholder="Rechercher une recette, un ingrédient, ..."
-                                />
-                                <div class="svg__group">
-                                    <svg
-                                        class="svg__clear"
-                                        width="17"
-                                        height="17"
-                                        viewBox="0 0 17 17"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M15 15L8.5 8.5M8.5 8.5L2 2M8.5 8.5L15 2M8.5 8.5L2 15"
-                                            stroke="#7A7A7A"
-                                            stroke-width="2.16667"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        />
-                                    </svg>
+                    <!-- --  <div class="sectionTop__form-container"> -->
+                    <form class="sectionTop__form" method="get">
+                        <div class="sectionTop__form-field form-field">
+                            <label for="field"></label>
+                            <input
+                                type="text"
+                                name="field"
+                                id="field"
+                                placeholder="Rechercher une recette, un ingrédient, ..."
+                            />
+                            <div class="sectionTop__svg-group svg-group">
+                                <svg
+                                    class="sectionTop__svg-clear svg-clear"
+                                    width="17"
+                                    height="17"
+                                    viewBox="0 0 17 17"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M15 15L8.5 8.5M8.5 8.5L2 2M8.5 8.5L15 2M8.5 8.5L2 15"
+                                        stroke="#7A7A7A"
+                                        stroke-width="2.16667"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
 
-                                    <svg
-                                        class="svg__search"
+                                <svg
+                                    class="sectionTop__svg-search svg-search"
+                                    width="51"
+                                    height="52"
+                                    viewBox="0 0 51 52"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <rect
                                         width="51"
                                         height="52"
-                                        viewBox="0 0 51 52"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <rect
-                                            width="51"
-                                            height="52"
-                                            rx="10"
-                                            fill="#1B1B1B"
-                                        />
-                                        <circle
-                                            class="m-glass"
-                                            cx="22"
-                                            cy="22"
-                                            r="9.5"
-                                            stroke="white"
-                                        />
-                                        <line
-                                            class="m-glass"
-                                            x1="30.3536"
-                                            y1="30.6464"
-                                            x2="39.3536"
-                                            y2="39.6464"
-                                            stroke="white"
-                                        />
-                                    </svg>
-                                </div>
+                                        rx="10"
+                                        fill="#1B1B1B"
+                                    />
+                                    <circle
+                                        class="m-glass"
+                                        cx="22"
+                                        cy="22"
+                                        r="9.5"
+                                        stroke="white"
+                                    />
+                                    <line
+                                        class="m-glass"
+                                        x1="30.3536"
+                                        y1="30.6464"
+                                        x2="39.3536"
+                                        y2="39.6464"
+                                        stroke="white"
+                                    />
+                                </svg>
                             </div>
-                        </form>
+                        </div>
+                    </form>
+                    <!--     </div> -->
+                </div>
+            </section>
+            <section class="section sectionRecipes">
+                <div class="sectionRecipes__header">
+                    <div class="sortingGroup">
+                        <div class="sortingGroup__customDropdown">
+                            <button class="dropdownBtn">
+                                <p>Ingredients</p>
+                                <i
+                                    class="fa-solid fa-angle-down"
+                                    title="Derouler le menu"
+                                ></i>
+                            </button>
+                            <ul class="sortingList" role="listbox" id="sort">
+                                <li
+                                    class="sortingList__input-field"
+                                    tabindex="0"
+                                    role="option"
+                                >
+                                    <form
+                                        class="sortingList__form"
+                                        method="get"
+                                    >
+                                        <div
+                                            class="sortingList__form-field form-field"
+                                        >
+                                            <label for="field"></label>
+                                            <input
+                                                type="text"
+                                                name="IngredientField"
+                                                id="IngredientField"
+                                            />
+                                            <div class="sortingList__svg-group">
+                                                <svg
+                                                    class="sortingList__svg-clear svg-clear"
+                                                    width="8"
+                                                    height="8"
+                                                    viewBox="0 0 8 8"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path
+                                                        d="M7 7L4 4M4 4L1 1M4 4L7 1M4 4L1 7"
+                                                        stroke="#7A7A7A"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                    />
+                                                </svg>
+
+                                                <svg
+                                                    width="14"
+                                                    height="14"
+                                                    viewBox="0 0 14 14"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <circle
+                                                        cx="5"
+                                                        cy="5"
+                                                        r="4.75"
+                                                        stroke="#7A7A7A"
+                                                        stroke-width="0.5"
+                                                    />
+                                                    <line
+                                                        x1="9.17678"
+                                                        y1="9.32322"
+                                                        x2="13.6768"
+                                                        y2="13.8232"
+                                                        stroke="#7A7A7A"
+                                                        stroke-width="0.5"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </li>
+                                <li tabindex="0" role="option">
+                                    <span class="through_sorting">dynamic</span>
+                                </li>
+                                <li tabindex="0" role="option">
+                                    <span class="through_sorting">Dynamic</span>
+                                </li>
+                                <li tabindex="0" role="option">
+                                    <span class="through_sorting">Dynamic</span>
+                                </li>
+                                <li tabindex="0" role="option">
+                                    <span class="through_sorting">Dynamic</span>
+                                </li>
+                                <li tabindex="0" role="option">
+                                    <span class="through_sorting">Dynamic</span>
+                                </li>
+                                <li tabindex="0" role="option">
+                                    <span class="through_sorting">Dynamic</span>
+                                </li>
+                                <li tabindex="0" role="option">
+                                    <span class="through_sorting">Dynamic</span>
+                                </li>
+                                <li tabindex="0" role="option">
+                                    <span class="through_sorting">Dynamic</span>
+                                </li>
+                                <li tabindex="0" role="option">
+                                    <span class="through_sorting">Dynamic</span>
+                                </li>
+                                <li tabindex="0" role="option">
+                                    <span class="through_sorting">Dynamic</span>
+                                </li>
+                                <li tabindex="0" role="option">
+                                    <span class="through_sorting">Dynamic</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="sortingGroup__customDropdown">
+                            <button class="dropdownBtn">
+                                <p>Appareils</p>
+                                <i
+                                    class="fa-solid fa-angle-down"
+                                    title="Derouler le menu"
+                                ></i>
+                            </button>
+                            <ul class="sortingList" role="listbox" id="sort">
+                                <li
+                                    class="sortingList__inputField"
+                                    tabindex="0"
+                                    role="option"
+                                >
+                                    <label for="inputIngredient"></label>
+                                    <input id="inputIngredient" type="text" />
+                                </li>
+                                <li tabindex="0" role="option">
+                                    <span class="through_sorting">dynamic</span>
+                                </li>
+                                <li tabindex="0" role="option">
+                                    <span class="through_sorting">Dynamic</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="sortingGroup__customDropdown">
+                            <button class="dropdownBtn">
+                                <p>Ustensiles</p>
+                                <i
+                                    class="fa-solid fa-angle-down"
+                                    title="Derouler le menu"
+                                ></i>
+                            </button>
+                            <ul class="sortingList" role="listbox" id="sort">
+                                <li
+                                    class="sortingList__inputField"
+                                    tabindex="0"
+                                    role="option"
+                                >
+                                    <label for="inputIngredient"></label>
+                                    <input id="inputIngredient" type="text" />
+                                </li>
+                                <li tabindex="0" role="option">
+                                    <span class="through_sorting">dynamic</span>
+                                </li>
+                                <li tabindex="0" role="option">
+                                    <span class="through_sorting">Dynamic</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                    <p class="anton">1500 RECETTES</p>
+                </div>
+                <div class="sectionRecipes__cardArea">
+                    <article class="sectionRecipes__card">Carddynamic</article>
+                    <article class="sectionRecipes__card">Carddynamic</article>
+                    <article class="sectionRecipes__card">Carddynamic</article>
                 </div>
             </section>
         </main>

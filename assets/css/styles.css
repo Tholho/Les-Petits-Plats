@@ -70,6 +70,7 @@ header .logo h1 {
 .sectionTop__form-field {
   position: relative;
   display: flex;
+  align-items: center;
 }
 .sectionTop__form-field input {
   width: 100%;
@@ -79,28 +80,127 @@ header .logo h1 {
   color: #7a7a7a;
   caret-color: transparent;
 }
-.sectionTop__form-field .svg__group {
+.sectionTop__svg-group {
   position: absolute;
   display: flex;
   align-items: center;
-  right: 0px;
+  right: 10px;
 }
-.sectionTop__form-field .svg__clear {
+.sectionTop__svg-clear {
   display: none;
   margin-right: 15px;
 }
-.sectionTop__form-field .svg__search {
+.sectionTop__svg__search {
   padding: 11px;
 }
-.sectionTop__form-field .svg__search * {
+.sectionTop__svg__search * {
   transition: all 0.3s;
 }
-.sectionTop__form-field .svg__search:hover rect {
+.sectionTop__svg__search:hover rect {
   fill: #ffd15b;
 }
-.sectionTop__form-field .svg__search:hover circle,
-.sectionTop__form-field .svg__search:hover line {
+.sectionTop__svg__search:hover circle,
+.sectionTop__svg__search:hover line {
   stroke: black;
+}
+
+.sectionRecipes {
+  background-color: #ededed;
+}
+
+.sectionRecipes__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+}
+.sortingGroup {
+  justify-self: start;
+  display: flex;
+}
+.sortingGroup__customDropdown {
+  margin-right: 40px;
+  position: relative;
+}
+
+.dropdownBtn {
+  display: flex;
+  border: none;
+  color: black;
+  background-color: white;
+  padding: 5px 20px;
+  font-size: 1rem;
+  align-items: center;
+  border-radius: 15px;
+}
+.dropdownBtn p {
+  margin-right: 70px;
+}
+.dropdownBtn i {
+  margin-right: 0px;
+}
+
+.sortingList {
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  list-style: none;
+  display: none;
+  background-color: white;
+  font-size: 0.875rem;
+  padding: 5px;
+  padding-top: 0px;
+  margin-top: 0px;
+  padding-left: 20px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  max-height: 250px;
+  overflow-y: scroll;
+}
+.sortingList li {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.sortingList__input-field {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  margin-top: 0px;
+}
+.sortingList__form-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.sortingList__form-field input {
+  width: 80%;
+  border-radius: 2px;
+  font-size: 0.875rem;
+  padding: 10px;
+  color: #7a7a7a;
+  border: 2px solid #c6c6c6;
+}
+.sortingList__svg-group {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 20px;
+}
+.sortingList__svg-clear {
+  display: none;
+  margin-right: 15px;
+}
+
+.sectionRecipes__cardArea {
+  display: flex;
+  justify-items: space-around;
+}
+.sectionRecipes__card {
+  height: 731px;
+  width: 380px;
+  border: 1px solid black;
+  margin: auto;
 }
 
 /*# sourceMappingURL=styles.css.map */

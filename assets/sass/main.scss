@@ -1,5 +1,7 @@
 $yellow: #ffd15b;
 $grey: #7a7a7a;
+$lightgrey: #ededed;
+$lightlightgrey: #c6c6c6;
 
 * {
     // border: 2px solid red;
@@ -88,6 +90,7 @@ section {
     &__form-field {
         position: relative;
         display: flex;
+        align-items: center;
         input {
             width: 100%;
             border-radius: 12px;
@@ -96,30 +99,135 @@ section {
             color: $grey;
             caret-color: transparent;
         }
-        .svg__group {
-            position: absolute;
-            display: flex;
-            align-items: center;
-            right: 0px;
+    }
+    &__svg-group {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        right: 10px;
+    }
+    &__svg-clear {
+        display: none;
+        margin-right: 15px;
+    }
+
+    &__svg__search {
+        padding: 11px;
+        * {
+            transition: all 0.3s;
         }
-        .svg__clear {
-            display: none;
-            margin-right: 15px;
-        }
-        .svg__search {
-            padding: 11px;
-            * {
-                transition: all 0.3s;
+        &:hover {
+            rect {
+                fill: $yellow;
             }
-            &:hover {
-                rect {
-                    fill: $yellow;
-                }
-                circle,
-                line {
-                    stroke: black;
-                }
+            circle,
+            line {
+                stroke: black;
             }
         }
+    }
+}
+
+.sectionRecipes {
+    background-color: $lightgrey;
+}
+
+.sectionRecipes__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    p {
+    }
+}
+
+.sortingGroup {
+    justify-self: start;
+    display: flex;
+    &__customDropdown {
+        margin-right: 40px;
+        position: relative;
+    }
+}
+
+.dropdownBtn {
+    display: flex;
+    border: none;
+    color: black;
+    background-color: white;
+    padding: 5px 20px;
+    font-size: 1rem;
+    align-items: center;
+    border-radius: 15px;
+    p {
+        margin-right: 70px;
+    }
+    i {
+        margin-right: 0px;
+    }
+}
+
+.sortingList {
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    list-style: none;
+    display: none;
+    background-color: white;
+    font-size: 0.875rem;
+    padding: 5px;
+    padding-top: 0px;
+    margin-top: 0px;
+    padding-left: 20px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    max-height: 250px;
+    overflow-y: scroll;
+    li {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    &__input-field {
+        position: sticky;
+        top: 0;
+        background-color: white;
+        margin-top: 0px;
+    }
+    &__form-field {
+        position: relative;
+        display: flex;
+        align-items: center;
+        input {
+            width: 80%;
+            border-radius: 2px;
+            font-size: 0.875rem;
+            padding: 10px;
+            color: $grey;
+            border: 2px solid $lightlightgrey;
+        }
+    }
+    &__svg-group {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        right: 20px;
+    }
+    &__svg-clear {
+        display: none;
+        margin-right: 15px;
+    }
+}
+
+.sectionRecipes {
+    &__cardArea {
+        display: flex;
+        justify-items: space-around;
+    }
+    &__card {
+        height: 731px;
+        width: 380px;
+        border: 1px solid black;
+        margin: auto;
     }
 }
