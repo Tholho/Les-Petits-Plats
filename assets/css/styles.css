@@ -90,17 +90,14 @@ header .logo h1 {
   display: none;
   margin-right: 15px;
 }
-.sectionTop__svg__search {
-  padding: 11px;
-}
-.sectionTop__svg__search * {
+.sectionTop__svg-search * {
   transition: all 0.3s;
 }
-.sectionTop__svg__search:hover rect {
+.sectionTop__svg-search:hover rect {
   fill: #ffd15b;
 }
-.sectionTop__svg__search:hover circle,
-.sectionTop__svg__search:hover line {
+.sectionTop__svg-search:hover circle,
+.sectionTop__svg-search:hover line {
   stroke: black;
 }
 
@@ -140,6 +137,8 @@ header .logo h1 {
 }
 
 .sortingList {
+  transition: all 0.4s;
+  max-height: 0px;
   position: absolute;
   box-sizing: border-box;
   width: 100%;
@@ -155,8 +154,10 @@ header .logo h1 {
   padding-left: 20px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  max-height: 250px;
   overflow-y: scroll;
+}
+.sortingList.displayed {
+  max-height: 250px;
 }
 .sortingList li {
   padding-top: 10px;

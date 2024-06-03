@@ -45,6 +45,7 @@ function setupCustomDropdown() {
     e.stopPropagation();
     const currentDropdown = e.target.closest(".dropdownBtn");
     const currentList = e.target.parentNode.nextElementSibling;
+    console.log(currentList);
     const angle = currentDropdown.querySelector("i");
     const paragraph = currentDropdown.querySelector("p");
     console.log(currentDropdown);

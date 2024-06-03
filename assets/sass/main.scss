@@ -111,8 +111,7 @@ section {
         margin-right: 15px;
     }
 
-    &__svg__search {
-        padding: 11px;
+    &__svg-search {
         * {
             transition: all 0.3s;
         }
@@ -167,6 +166,11 @@ section {
 }
 
 .sortingList {
+    transition: all 0.4s;
+    &.displayed {
+        max-height: 250px;
+    }
+    max-height: 0px;
     position: absolute;
     box-sizing: border-box;
     width: 100%;
@@ -182,7 +186,6 @@ section {
     padding-left: 20px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    max-height: 250px;
     overflow-y: scroll;
     li {
         padding-top: 10px;
