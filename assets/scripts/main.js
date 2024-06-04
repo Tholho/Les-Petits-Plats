@@ -1,3 +1,7 @@
+import { recipes } from "./data/recipes.js";
+
+console.log(recipes);
+
 function searchFieldClear() {
   const formFields = document.querySelectorAll(".form-field input");
 
