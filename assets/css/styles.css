@@ -150,7 +150,7 @@ header .logo h1 {
   font-size: 1rem;
   align-items: center;
 }
-.dropdownBtn p {
+.dropdownBtn__title {
   margin-right: 70px;
 }
 .dropdownBtn i {
