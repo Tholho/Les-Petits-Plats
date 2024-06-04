@@ -37,7 +37,7 @@ function setupCustomDropdown() {
   }
   function setAngleUp(target) {
     const angle = target.querySelector("i");
-    const paragraph = target.querySelector("p");
+    const paragraph = target.querySelector(".dropdownBtn__title");
     angle.classList.remove("fa-angle-down");
     angle.classList.add("fa-angle-up");
     angle.addEventListener("click", hideCustomDropdown);
@@ -50,8 +50,11 @@ function setupCustomDropdown() {
       ".sortingGroup__customDropdown",
     );
     const angle = currentDropdown.querySelector("i");
-    const paragraph = currentDropdown.querySelector("p");
+    const paragraph = currentDropdown.querySelector(".dropdownBtn__title");
     currentCustomDropdown.classList.remove("displayed");
+    currentCustomDropdown.scrollTo({
+      top: 0,
+    });
     angle.classList.add("fa-angle-down");
     angle.classList.remove("fa-angle-up");
     angle.removeEventListener("click", hideCustomDropdown);
