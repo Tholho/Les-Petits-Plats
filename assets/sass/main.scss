@@ -25,6 +25,16 @@ $lightlightgrey: #c6c6c6;
 }
 */
 
+/* dynamic filtered display classes */
+
+.hide {
+    display: none;
+}
+
+.show {
+    // PROBABLY UNNECESSARY, everything is displayed by default
+}
+
 body {
     margin: 0;
     font-family: "Manrope", sans-serif;
@@ -129,14 +139,17 @@ section {
 
 .sectionRecipes {
     background-color: $lightgrey;
+    padding: 0px 70px;
 }
 
 .sectionRecipes__header {
     position: relative;
     padding: 30px;
-    margin: 0px 20px;
+    margin: -5px 0px;
     p {
         text-align: end;
+        font-size: 1.313rem;
+        letter-spacing: 0.01rem;
     }
 }
 
@@ -199,6 +212,7 @@ section {
     }
     li {
         padding-left: 20px;
+        text-transform: capitalize;
     }
     li:not(.sortingList__input-field) {
         padding-top: 8px;

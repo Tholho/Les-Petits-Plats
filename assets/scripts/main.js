@@ -1,6 +1,8 @@
 import { recipes } from "./data/recipes.js";
+import makeAllDOM from "./data/data1.js";
 
 console.log(recipes);
+makeAllDOM();
 
 function searchFieldClear() {
   const formFields = document.querySelectorAll(".form-field input");
