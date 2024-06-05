@@ -89,19 +89,11 @@ function makeFilters() {
   const unique_appareils = [];
   const unique_ustensiles = [];
 
-  /*
-  recipes.forEach((recipe) =>
-    recipe.ingredients.forEach((ingredient) =>
-      addUniqueItem(unique_ingredients, ingredient),
-    ),
-  );
-  */
-
   recipes.forEach((recipe) => {
     recipe.ingredients.forEach((ingredient) => {
       addUniqueItem(unique_ingredients, ingredient.ingredient.toLowerCase());
     });
-    addUniqueItem(unique_appareils, recipe.appliance);
+    addUniqueItem(unique_appareils, recipe.appliance.toLowerCase());
     recipe.ustensils.forEach((ustensil) => {
       addUniqueItem(unique_ustensiles, ustensil.toLowerCase());
     });
@@ -120,8 +112,8 @@ function makeFilters() {
   }
 
   //  unique_ingredients.forEach((ingredient) => console.log(ingredient));
-  unique_ustensiles.forEach((ingredient) => console.log(ingredient));
-  //  unique_appareils.forEach((ingredient) => console.log(ingredient));
+  //unique_ustensiles.forEach((ingredient) => console.log(ingredient));
+  unique_appareils.forEach((ingredient) => console.log(ingredient));
 
   //Generer une liste d'ingredients uniques, puis la trier par ordre
   // alphabetique, puis generer les 'li'
