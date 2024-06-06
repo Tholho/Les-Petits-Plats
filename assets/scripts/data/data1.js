@@ -3,12 +3,14 @@
 import { recipes } from "./recipes.js";
 import refreshFilters from "./refreshFilters.js";
 import initFilters from "./initFilters.js";
+import initCards from "./initCards.js";
 
 export default function makeAllDOM() {
-  //  makeCards();
+  initCards();
   initFilters();
 }
 
+//placeholder logic
 const mainForm = document.querySelector(".sectionTop__form-field input");
 mainForm.oninput = refreshFilters();
 
@@ -22,10 +24,4 @@ function makeCard(recipe) {
   // each enabled tag stores any item it added a marker upon
   // on tag removal, it removes the markers
   // filter on articles is then re applied
-  console.log(recipe.name);
-  console.log(recipe.image);
-  console.log(recipe.ingredients); //do forEach
-  console.log(recipe.ingredients[0]);
-  console.log(recipe.time);
-  console.log(recipe.description);
 }

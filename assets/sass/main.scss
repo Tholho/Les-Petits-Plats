@@ -268,12 +268,14 @@ section {
     z-index: 1;
     &__cardArea {
         display: flex;
+        flex-flow: wrap;
         justify-items: space-around;
     }
 }
 
 .cardRecipe {
     &__article {
+        overflow-y: scroll;
         position: relative;
         z-index: -1;
         height: 731px;
@@ -281,6 +283,7 @@ section {
         margin: auto;
         border-radius: 15px;
         background-color: white;
+        margin-bottom: 70px;
         img {
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
@@ -309,9 +312,12 @@ section {
             font-size: 0.75rem;
             letter-spacing: 1.2px;
             color: $grey;
+            text-transform: uppercase;
         }
         &-instructions {
             margin-bottom: 20px;
+            overflow-y: hidden;
+            max-height: 90px;
         }
         dl {
             display: grid;
@@ -324,6 +330,9 @@ section {
                 margin: 10px 0px;
                 * {
                     margin: 0;
+                }
+                dt {
+                    text-transform: capitalize;
                 }
                 dd {
                     color: $grey;

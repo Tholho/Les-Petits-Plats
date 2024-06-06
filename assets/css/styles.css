@@ -238,10 +238,12 @@ header .logo h1 {
 }
 .sectionRecipes__cardArea {
   display: flex;
+  flex-flow: wrap;
   justify-items: space-around;
 }
 
 .cardRecipe__article {
+  overflow-y: scroll;
   position: relative;
   z-index: -1;
   height: 731px;
@@ -249,6 +251,7 @@ header .logo h1 {
   margin: auto;
   border-radius: 15px;
   background-color: white;
+  margin-bottom: 70px;
 }
 .cardRecipe__article img {
   border-top-left-radius: 15px;
@@ -278,9 +281,12 @@ header .logo h1 {
   font-size: 0.75rem;
   letter-spacing: 1.2px;
   color: #7a7a7a;
+  text-transform: uppercase;
 }
 .cardRecipe__article-instructions {
   margin-bottom: 20px;
+  overflow-y: hidden;
+  max-height: 90px;
 }
 .cardRecipe__article dl {
   display: grid;
@@ -295,6 +301,9 @@ header .logo h1 {
 }
 .cardRecipe__article dl > div * {
   margin: 0;
+}
+.cardRecipe__article dl > div dt {
+  text-transform: capitalize;
 }
 .cardRecipe__article dl > div dd {
   color: #7a7a7a;
