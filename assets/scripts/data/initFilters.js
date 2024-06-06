@@ -19,10 +19,16 @@ export default async function initFilters() {
     recipes.forEach((recipe) => {
       recipe.ingredients.forEach(
         (ingredients) =>
-          (ingredients.ingredient = ingredients.ingredient.toLowerCase()),
+          (ingredients.ingredient =
+            ingredients.ingredient.charAt(0).toUpperCase() +
+            ingredients.ingredient.slice(1).toLowerCase()),
       );
-      recipe.appliance = recipe.appliance.toLowerCase();
-      recipe.ustensils = recipe.ustensils.map((ust) => ust.toLowerCase());
+      recipe.appliance =
+        recipe.appliance.charAt(0).toUpperCase() +
+        recipe.appliance.slice(1).toLowerCase();
+      recipe.ustensils = recipe.ustensils.map(
+        (ust) => ust.charAt(0).toUpperCase() + ust.slice(1).toLowerCase(),
+      );
     });
   }
 
@@ -63,15 +69,13 @@ export default async function initFilters() {
     const elem = makeElemLI(appareil);
 
     recipes.forEach((recipe) => {
-      recipe.ingredients.forEach((ing) => {
-        if (ing.ingredient == elem.innerText) {
-          if (!elem.dataset.recipes) {
-            elem.dataset.recipes = recipe.id;
-          } else {
-            elem.dataset.recipes = elem.dataset.recipes + "-" + recipe.id;
-          }
+      if (recipe.appliance == elem.innerText) {
+        if (!elem.dataset.recipes) {
+          elem.dataset.recipes = recipe.id;
+        } else {
+          elem.dataset.recipes = elem.dataset.recipes + "-" + recipe.id;
         }
-      });
+      }
     });
     ul_appareils.append(elem);
   });

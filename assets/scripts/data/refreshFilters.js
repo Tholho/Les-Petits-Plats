@@ -22,6 +22,15 @@ export default function refreshFilters() {
   const displayedCards = document.querySelectorAll(
     ".cardRecipe__article:not(.hide)",
   );
+
+  const displayedIds = [];
+
+  displayedCards.forEach((card) => {
+    displayedIds.push(card.dataset.id);
+  });
+
+  console.log(displayedIds);
+
   const idSelected = document.querySelectorAll("[data-id]");
   //  console.log(idSelected);
   idSelected.forEach((sel) => {
