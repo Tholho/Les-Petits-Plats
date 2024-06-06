@@ -19,17 +19,37 @@ export default function refreshFilters() {
   const ul_appareils = appareilsDropdown.querySelector("ul");
   const ul_ustensiles = ustensilesDropdown.querySelector("ul");
 
+  const li_ingredients = ul_ingredients.querySelectorAll("li");
+  const li_appareils = ul_appareils.querySelectorAll("li");
+  const li_ustensiles = ul_ustensiles.querySelectorAll("li");
+
   const displayedCards = document.querySelectorAll(
     ".cardRecipe__article:not(.hide)",
   );
 
-  const displayedIds = [];
+  //const displayedIds = [];
+
+  console.log(li_ingredients);
 
   displayedCards.forEach((card) => {
-    displayedIds.push(card.dataset.id);
+    hideListItems(card.dataset.id);
   });
 
-  console.log(displayedIds);
+  function hideListItems(id) {
+    const regex = new RegExp(`(^|-)${id}($|-)`);
+
+    li_ingredients.forEach((li) => {
+      if (li.classList.contains("hide")) {
+        if (regex.test(li.dataset.recipes)) {
+          li.classList.remove("hide");
+        }
+      } else {
+        if (!regex.test(li.dataset.recipes)) {
+          li.classList.add("hide");
+        }
+      }
+    });
+  }
 
   const idSelected = document.querySelectorAll("[data-id]");
   //  console.log(idSelected);
