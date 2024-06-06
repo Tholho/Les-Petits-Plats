@@ -286,7 +286,7 @@ header .logo h1 {
 .cardRecipe__article-instructions {
   margin-bottom: 20px;
   overflow-y: hidden;
-  max-height: 90px;
+  max-height: 115px;
 }
 .cardRecipe__article dl {
   display: grid;
