@@ -11,8 +11,14 @@ export default function makeAllDOM() {
 }
 
 //placeholder logic
-const mainForm = document.querySelector(".sectionTop__form-field input");
-mainForm.oninput = refreshFilters();
+document.addEventListener("DOMContentLoaded", function () {
+  const mainForm = document.querySelector(".sectionTop__form-field input");
+  mainForm.addEventListener("input", () => {
+    if (mainForm.value.length >= 3) {
+      refreshFilters();
+    }
+  }); //refreshFilters();
+});
 
 function makeCards() {
   recipes.forEach((recipe) => makeCard(recipe));

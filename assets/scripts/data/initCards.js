@@ -12,6 +12,7 @@ export default function initCards() {
   function makeArticle(recipe) {
     const article = document.createElement("article");
     article.classList.add("cardRecipe__article");
+    article.dataset.id = recipe.id;
     const image = document.createElement("img");
     image.src = "assets/img/recipes/" + recipe.image;
     image.alt = "Photo de recette";
