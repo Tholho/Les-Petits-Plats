@@ -4,6 +4,7 @@ import { recipes } from "./recipes.js";
 import refreshFilters from "./refreshFilters.js";
 import initFilters from "./initFilters.js";
 import initCards from "./initCards.js";
+import refreshCardsViaFilters from "./refreshCardsViaFilters.js";
 
 export default function makeAllDOM() {
   initCards();
@@ -13,6 +14,8 @@ export default function makeAllDOM() {
 //placeholder logic
 document.addEventListener("DOMContentLoaded", function () {
   const mainForm = document.querySelector(".sectionTop__form-field input");
+
+  refreshCardsViaFilters();
   mainForm.addEventListener("input", () => {
     if (mainForm.value.length >= 3) {
       refreshFilters();

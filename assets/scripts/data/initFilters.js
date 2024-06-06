@@ -62,6 +62,7 @@ export default async function initFilters() {
         }
       });
     });
+    elem.classList.add("ingredient_item");
     ul_ingredients.append(elem);
   });
 
@@ -77,6 +78,7 @@ export default async function initFilters() {
         }
       }
     });
+    elem.classList.add("appliance_item");
     ul_appareils.append(elem);
   });
 
@@ -94,6 +96,7 @@ export default async function initFilters() {
         }
       });
     });
+    elem.classList.add("ustensil_item");
     ul_ustensiles.append(elem);
   });
 
