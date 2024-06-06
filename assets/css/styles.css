@@ -190,7 +190,6 @@ header .logo h1 {
 }
 .sortingList li {
   padding-left: 20px;
-  text-transform: capitalize;
 }
 .sortingList li:not(.sortingList__input-field) {
   padding-top: 8px;

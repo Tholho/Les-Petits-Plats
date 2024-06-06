@@ -1,6 +1,6 @@
 import { recipes } from "./recipes";
 
-export default function initFilters() {
+export default async function initFilters() {
   // useful DOM elements
   const ingredientsDropdown = document.querySelector(".ingredients-dropdown");
   const appareilsDropdown = document.querySelector(".appareils-dropdown");
@@ -15,40 +15,89 @@ export default function initFilters() {
   const unique_appareils = [];
   const unique_ustensiles = [];
 
+  async function lowerCaseRecipes() {
+    recipes.forEach((recipe) => {
+      recipe.ingredients.forEach(
+        (ingredients) =>
+          (ingredients.ingredient = ingredients.ingredient.toLowerCase()),
+      );
+      recipe.appliance = recipe.appliance.toLowerCase();
+      recipe.ustensils = recipe.ustensils.map((ust) => ust.toLowerCase());
+    });
+  }
+
+  await lowerCaseRecipes().then(() => console.log(recipes));
+
   // ici l'objet recipes doit etre un clone APRES ACTION FILTRE de l'objet recipes
   // original.
   recipes.forEach((recipe) => {
     recipe.ingredients.forEach((ingredient) => {
-      addUniqueItem(unique_ingredients, ingredient.ingredient.toLowerCase());
+      addUniqueItem(unique_ingredients, ingredient.ingredient);
     });
-    addUniqueItem(unique_appareils, recipe.appliance.toLowerCase());
+    addUniqueItem(unique_appareils, recipe.appliance);
     recipe.ustensils.forEach((ustensil) => {
-      addUniqueItem(unique_ustensiles, ustensil.toLowerCase());
+      addUniqueItem(unique_ustensiles, ustensil);
     });
   });
-
+  unique_ingredients.sort();
+  unique_appareils.sort();
+  unique_ustensiles.sort();
+  console.log(unique_ustensiles);
   unique_ingredients.forEach((ingredient) => {
     const elem = makeElemLI(ingredient);
-
+    recipes.forEach((recipe) => {
+      recipe.ingredients.forEach((ing) => {
+        if (ing.ingredient == elem.innerText) {
+          if (!elem.dataset.recipes) {
+            elem.dataset.recipes = recipe.id;
+          } else {
+            elem.dataset.recipes = elem.dataset.recipes + "-" + recipe.id;
+          }
+        }
+      });
+    });
     ul_ingredients.append(elem);
   });
 
   unique_appareils.forEach((appareil) => {
     const elem = makeElemLI(appareil);
 
+    recipes.forEach((recipe) => {
+      recipe.ingredients.forEach((ing) => {
+        if (ing.ingredient == elem.innerText) {
+          if (!elem.dataset.recipes) {
+            elem.dataset.recipes = recipe.id;
+          } else {
+            elem.dataset.recipes = elem.dataset.recipes + "-" + recipe.id;
+          }
+        }
+      });
+    });
     ul_appareils.append(elem);
   });
 
   unique_ustensiles.forEach((ustensile) => {
     const elem = makeElemLI(ustensile);
 
+    recipes.forEach((recipe) => {
+      recipe.ustensils.forEach((ust) => {
+        if (ust == elem.innerText) {
+          if (!elem.dataset.recipes) {
+            elem.dataset.recipes = recipe.id;
+          } else {
+            elem.dataset.recipes = elem.dataset.recipes + "-" + recipe.id;
+          }
+        }
+      });
+    });
     ul_ustensiles.append(elem);
   });
 
   function makeElemLI(item) {
     const li = document.createElement("li");
+    const capitalItem = item.charAt(0).toUpperCase() + item.slice(1);
 
-    li.innerText = item;
+    li.innerText = capitalItem;
 
     return li;
   }
