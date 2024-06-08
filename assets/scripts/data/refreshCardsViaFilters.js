@@ -95,10 +95,16 @@ export default async function refreshCardsViaFilters() {
 
     activeFilters.forEach((elem) => {
       const localRecipes = elem.dataset.recipes.split("-");
-      filteredRecipes.push(...localRecipes);
+      filteredRecipes.push(localRecipes);
     });
     cards.forEach((card) => {
-      if (filteredRecipes.includes(card.dataset.id)) {
+      let flag = 1;
+      filteredRecipes.forEach((list) => {
+        if (!list.includes(card.dataset.id)) {
+          flag = 0;
+        }
+      });
+      if (flag == 1) {
         card.classList.remove("hide");
       }
     });
