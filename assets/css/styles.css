@@ -116,11 +116,6 @@ header .logo h1 {
   padding: 30px;
   margin: -5px 0px;
 }
-.sectionRecipes__header p {
-  text-align: end;
-  font-size: 1.313rem;
-  letter-spacing: 0.01rem;
-}
 
 .sortingList__item__selected {
   order: -1;
@@ -131,8 +126,10 @@ header .logo h1 {
   justify-self: start;
   display: flex;
   position: absolute;
+  pointer-events: none;
 }
 .sortingGroup__customDropdown {
+  pointer-events: auto;
   background-color: white;
   border-radius: 15px;
   margin-right: 40px;
@@ -189,7 +186,13 @@ header .logo h1 {
   overflow-y: scroll;
 }
 .sortingList li {
+  display: flex;
+  justify-content: space-between;
   padding-left: 20px;
+}
+.sortingList li svg {
+  margin-right: 20px;
+  display: none;
 }
 .sortingList li:not(.sortingList__input-field) {
   padding-top: 8px;
@@ -217,6 +220,9 @@ header .logo h1 {
   border-radius: 2px;
   font-size: 0.875rem;
   padding: 10px;
+  max-width: fit-content;
+  margin-right: 20px;
+  padding-right: 50px;
   color: #7a7a7a;
   border: 2px solid #c6c6c6;
 }
@@ -234,6 +240,27 @@ header .logo h1 {
 .sectionRecipes {
   position: relative;
   z-index: 1;
+}
+.sectionRecipes__recipe-total {
+  text-align: end;
+  font-size: 1.313rem;
+  letter-spacing: 0.01rem;
+}
+.sectionRecipes__tags-section {
+  display: flex;
+  flex-flow: wrap;
+}
+.sectionRecipes__applied-tag {
+  background-color: #ffd15b;
+  padding: 20px;
+  font-size: 0.875rem;
+  border-radius: 15px;
+  margin-right: 20px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.sectionRecipes__applied-tag svg {
+  margin-left: 30px;
 }
 .sectionRecipes__cardArea {
   display: flex;

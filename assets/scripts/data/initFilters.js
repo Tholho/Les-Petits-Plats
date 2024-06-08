@@ -49,7 +49,7 @@ export default async function initFilters() {
   unique_appareils.sort();
   unique_ustensiles.sort();
   console.log(unique_ustensiles);
-  unique_ingredients.forEach((ingredient) => {
+  unique_ingredients.forEach((ingredient, index) => {
     const elem = makeElemLI(ingredient);
     recipes.forEach((recipe) => {
       recipe.ingredients.forEach((ing) => {
@@ -63,10 +63,11 @@ export default async function initFilters() {
       });
     });
     elem.classList.add("ingredient_item");
+    elem.dataset.id = "ingredient_" + index;
     ul_ingredients.append(elem);
   });
 
-  unique_appareils.forEach((appareil) => {
+  unique_appareils.forEach((appareil, index) => {
     const elem = makeElemLI(appareil);
 
     recipes.forEach((recipe) => {
@@ -79,10 +80,11 @@ export default async function initFilters() {
       }
     });
     elem.classList.add("appliance_item");
+    elem.dataset.id = "appliance_" + index;
     ul_appareils.append(elem);
   });
 
-  unique_ustensiles.forEach((ustensile) => {
+  unique_ustensiles.forEach((ustensile, index) => {
     const elem = makeElemLI(ustensile);
 
     recipes.forEach((recipe) => {
@@ -97,14 +99,45 @@ export default async function initFilters() {
       });
     });
     elem.classList.add("ustensil_item");
+    elem.dataset.id = "ustensil_" + index;
     ul_ustensiles.append(elem);
   });
 
   function makeElemLI(item) {
     const li = document.createElement("li");
     const capitalItem = item.charAt(0).toUpperCase() + item.slice(1);
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    const svg_circle = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "circle",
+    );
+    const svg_path = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path",
+    );
+
+    svg.classList.add("svg-clear");
+    svg.setAttribute("width", "17");
+    svg.setAttribute("height", "17");
+    svg.setAttribute("viewBox", "0 0 17 17");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    svg_circle.setAttribute("cx", "8.5");
+    svg_circle.setAttribute("cy", "8.5");
+    svg_circle.setAttribute("r", "8.5");
+    svg_circle.setAttribute("fill", "black");
+    svg_path.setAttribute(
+      "d",
+      "M11 11L8.5 8.5M8.5 8.5L6 6M8.5 8.5L11 6M8.5 8.5L6 11",
+    );
+    svg_path.setAttribute("stroke", "#FFD15B");
+    svg_path.setAttribute("stroke-linecap", "round");
+    svg_path.setAttribute("stroke-linejoin", "round");
 
     li.innerText = capitalItem;
+    svg.appendChild(svg_circle);
+    svg.appendChild(svg_path);
+    li.appendChild(svg);
 
     return li;
   }

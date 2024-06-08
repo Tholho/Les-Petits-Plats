@@ -31,9 +31,14 @@ export default function refreshFilters() {
 
   console.log(li_ingredients);
 
+  //adjust list items according to displayed cards
   displayedCards.forEach((card) => {
     hideListItems(card.dataset.id);
   });
+
+  //must make a function that adjust displayed cards according to active filters
+  //this one is important for filter removals
+  // in refreshcards
 
   function hideListItems(id) {
     const regex = new RegExp(`(^|-)${id}($|-)`);

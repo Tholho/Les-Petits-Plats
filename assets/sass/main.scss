@@ -146,11 +146,6 @@ section {
     position: relative;
     padding: 30px;
     margin: -5px 0px;
-    p {
-        text-align: end;
-        font-size: 1.313rem;
-        letter-spacing: 0.01rem;
-    }
 }
 
 .sortingList__item__selected {
@@ -162,7 +157,9 @@ section {
     justify-self: start;
     display: flex;
     position: absolute;
+    pointer-events: none;
     &__customDropdown {
+        pointer-events: auto;
         background-color: white;
         border-radius: 15px;
         margin-right: 40px;
@@ -219,7 +216,13 @@ section {
         overflow-y: scroll;
     }
     li {
+        display: flex;
+        justify-content: space-between;
         padding-left: 20px;
+        svg {
+            margin-right: 20px;
+            display: none;
+        }
     }
     li:not(.sortingList__input-field) {
         padding-top: 8px;
@@ -246,6 +249,9 @@ section {
             border-radius: 2px;
             font-size: 0.875rem;
             padding: 10px;
+            max-width: fit-content;
+            margin-right: 20px;
+            padding-right: 50px;
             color: $grey;
             border: 2px solid $lightlightgrey;
         }
@@ -265,6 +271,27 @@ section {
 .sectionRecipes {
     position: relative;
     z-index: 1;
+    &__recipe-total {
+        text-align: end;
+        font-size: 1.313rem;
+        letter-spacing: 0.01rem;
+    }
+    &__tags-section {
+        display: flex;
+        flex-flow: wrap;
+    }
+    &__applied-tag {
+        background-color: $yellow;
+        padding: 20px;
+        font-size: 0.875rem;
+        border-radius: 15px;
+        margin-right: 20px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        svg {
+            margin-left: 30px;
+        }
+    }
     &__cardArea {
         display: flex;
         flex-flow: wrap;
