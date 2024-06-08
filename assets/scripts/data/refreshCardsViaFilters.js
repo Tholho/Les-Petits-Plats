@@ -1,4 +1,5 @@
 export default async function refreshCardsViaFilters() {
+  const cards = document.querySelectorAll(".cardRecipe__article");
   const sortingGroup = document.querySelector(".sortingGroup");
   const filtersButtons = document.querySelectorAll(".dropdownBtn");
   const articles = document.querySelectorAll(".cardRecipe__article");
@@ -85,27 +86,28 @@ export default async function refreshCardsViaFilters() {
 
   //remove visual effects from list and tags and refresh cards depending on
   //active filters
-  function removeFilter(event) {
-    event.stopPropagation();
-    console.log(this);
-    //aspect fonctionnel
+
+  function refreshCards() {
     const activeFilters = document.querySelectorAll(
       ".sectionRecipes__applied-tag",
     );
-    //use recipes parameter to confront to other active filters
-    //if no match : remove hide class from given recipe.
+    const filteredRecipes = [];
 
-    //aspect visuel
+    activeFilters.forEach((elem) => {
+      const localRecipes = elem.dataset.recipes.split("-");
+      filteredRecipes.push(...localRecipes);
+    });
+    cards.forEach((card) => {
+      if (filteredRecipes.includes(card.dataset.id)) {
+        card.classList.remove("hide");
+      }
+    });
+  }
 
-    //Si le parent de la croix est un tag
-    //function removeTagThenList
-
-    //Si le parent de la croix est dans la liste
-    //function removeListThenTag
-    if (this.parentNode.nodeType == "LI") {
-      console.log("damm");
+  function removeFilter(event) {
+    event.stopPropagation();
+    if (this.parentNode.nodeName == "LI") {
       unselectListItem(this.parentNode);
-      console.log(this.parentNode.dataset.id);
       removeTag(this.parentNode.dataset.id);
     } else {
       const localId = this.parentNode.dataset.id;
@@ -120,11 +122,21 @@ export default async function refreshCardsViaFilters() {
       item.querySelector("svg").style.display = "none";
     }
     function removeTag(id) {
-      const tag = document.querySelector(`p[data-id="${id}"]`);
-      console.log(tag);
+      const tag = document.querySelector(
+        `.sectionRecipes__applied-tag[data-id="${id}"]`,
+      );
+      console.log("isit" + tag);
       tag.remove();
     }
-
-    function anotherRemove() {}
+    refreshCards();
+    checkNoFilter();
+    function checkNoFilter() {
+      const activeFilters = document.querySelector(
+        ".sectionRecipes__applied-tag",
+      );
+      if (!activeFilters) {
+        cards.forEach((card) => card.classList.remove("hide"));
+      }
+    }
   }
 }
