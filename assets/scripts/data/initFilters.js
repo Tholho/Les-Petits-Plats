@@ -49,6 +49,7 @@ export default async function initFilters() {
   unique_appareils.sort();
   unique_ustensiles.sort();
   console.log(unique_ustensiles);
+
   unique_ingredients.forEach((ingredient, index) => {
     const elem = makeElemLI(ingredient);
     recipes.forEach((recipe) => {
@@ -79,6 +80,7 @@ export default async function initFilters() {
         }
       }
     });
+
     elem.classList.add("appliance_item");
     elem.dataset.id = "appliance_" + index;
     ul_appareils.append(elem);
@@ -98,6 +100,7 @@ export default async function initFilters() {
         }
       });
     });
+
     elem.classList.add("ustensil_item");
     elem.dataset.id = "ustensil_" + index;
     ul_ustensiles.append(elem);
@@ -137,6 +140,7 @@ export default async function initFilters() {
     li.innerText = capitalItem;
     svg.appendChild(svg_circle);
     svg.appendChild(svg_path);
+    li.classList.add("list-item");
     li.appendChild(svg);
 
     return li;

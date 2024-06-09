@@ -1,3 +1,5 @@
+import refreshFilters from "./refreshFilters";
+
 export default async function refreshCardsViaFilters() {
   const cards = document.querySelectorAll(".cardRecipe__article");
   const sortingGroup = document.querySelector(".sortingGroup");
@@ -40,7 +42,6 @@ export default async function refreshCardsViaFilters() {
       const tag_clear = tag.querySelector("svg");
       tag_clear.addEventListener("click", removeFilter);
     }
-    console.log(this.dataset.recipes);
     articles.forEach((article) => {
       const regex = new RegExp(`(^|-)${article.dataset.id}($|-)`);
       if (!article.classList.contains("hide")) {
@@ -49,6 +50,8 @@ export default async function refreshCardsViaFilters() {
         }
       }
     });
+    await refreshCards();
+    await refreshFilters();
   }
 
   async function createTag(tagname, recipes, id) {
@@ -88,6 +91,8 @@ export default async function refreshCardsViaFilters() {
   //active filters
 
   function refreshCards() {
+    const recipeTotal = document.querySelector(".sectionRecipes__recipe-total");
+    console.log("DOES IT" + recipeTotal);
     const activeFilters = document.querySelectorAll(
       ".sectionRecipes__applied-tag",
     );
@@ -98,26 +103,39 @@ export default async function refreshCardsViaFilters() {
       filteredRecipes.push(localRecipes);
     });
     cards.forEach((card) => {
-      let flag = 1;
-      filteredRecipes.forEach((list) => {
+      let flag;
+      flag = filteredRecipes.some((list) => {
         if (!list.includes(card.dataset.id)) {
-          flag = 0;
+          return true;
         }
       });
-      if (flag == 1) {
+      if (!flag) {
         card.classList.remove("hide");
       }
     });
+    let total = 0;
+    cards.forEach((card) => {
+      if (!card.classList.contains("hide")) {
+        total++;
+      }
+    });
+    if (total == 1) {
+      recipeTotal.innerText = total + " recette";
+    } else {
+      recipeTotal.innerText = total + " recettes";
+    }
   }
 
-  function removeFilter(event) {
+  async function removeFilter(event) {
     event.stopPropagation();
     if (this.parentNode.nodeName == "LI") {
       unselectListItem(this.parentNode);
       removeTag(this.parentNode.dataset.id);
     } else {
       const localId = this.parentNode.dataset.id;
-      this.parentNode.remove();
+      const tag = this.parentNode;
+
+      tag.remove();
       const listItem = document.querySelector(`[data-id="${localId}"]`);
       listItem.classList.remove("sortingList__item__selected");
       listItem.querySelector("svg").style.display = "none";
@@ -131,18 +149,20 @@ export default async function refreshCardsViaFilters() {
       const tag = document.querySelector(
         `.sectionRecipes__applied-tag[data-id="${id}"]`,
       );
-      console.log("isit" + tag);
       tag.remove();
     }
-    refreshCards();
-    checkNoFilter();
-    function checkNoFilter() {
-      const activeFilters = document.querySelector(
-        ".sectionRecipes__applied-tag",
-      );
-      if (!activeFilters) {
-        cards.forEach((card) => card.classList.remove("hide"));
-      }
+
+    await refreshCards();
+    await refreshFilters();
+    /* checkNoFilter();
+  function checkNoFilter() {
+    const activeFilters = document.querySelector(
+      ".sectionRecipes__applied-tag",
+    );
+    if (!activeFilters) {
+      cards.forEach((card) => card.classList.remove("hide"));
     }
+  }
+  */
   }
 }

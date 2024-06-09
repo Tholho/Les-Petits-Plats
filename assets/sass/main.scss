@@ -35,6 +35,21 @@ $lightlightgrey: #c6c6c6;
     // PROBABLY UNNECESSARY, everything is displayed by default
 }
 
+.smooth-transition {
+    transition: all 1s ease;
+}
+
+@keyframes scaleUp {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+        z-index: 0;
+    }
+}
+
 body {
     margin: 0;
     font-family: "Manrope", sans-serif;
@@ -46,6 +61,7 @@ body {
 header {
     position: relative;
     max-width: 1440px;
+
     .logo {
         margin: 0;
         display: flex;
@@ -55,9 +71,11 @@ header {
         color: white;
         z-index: 1;
         align-items: center;
+
         * {
             margin: 0;
         }
+
         h1 {
             font-size: 1.75rem;
             letter-spacing: 0.5px;
@@ -74,12 +92,14 @@ section {
 
 .sectionTop {
     position: relative;
+
     &__background-img {
         height: 667px;
         width: 100%;
         object-fit: cover;
         filter: brightness(70%);
     }
+
     &__content {
         position: absolute;
         top: 50%;
@@ -87,6 +107,7 @@ section {
         transform: translateY(-50%) translateX(-50%);
         width: 66%;
     }
+
     &__hero {
         width: 80%;
         margin: auto;
@@ -95,12 +116,15 @@ section {
         text-align: center;
         color: $yellow;
     }
+
     &__form-container {
     }
+
     &__form-field {
         position: relative;
         display: flex;
         align-items: center;
+
         input {
             width: 100%;
             border-radius: 12px;
@@ -110,12 +134,14 @@ section {
             caret-color: transparent;
         }
     }
+
     &__svg-group {
         position: absolute;
         display: flex;
         align-items: center;
         right: 10px;
     }
+
     &__svg-clear {
         display: none;
         margin-right: 15px;
@@ -125,10 +151,12 @@ section {
         * {
             transition: all 0.3s;
         }
+
         &:hover {
             rect {
                 fill: $yellow;
             }
+
             circle,
             line {
                 stroke: black;
@@ -151,6 +179,7 @@ section {
 .sortingList__item__selected {
     order: -1;
     background-color: $yellow;
+    transition: background-color 0.5s ease;
 }
 
 .sortingGroup {
@@ -158,6 +187,7 @@ section {
     display: flex;
     position: absolute;
     pointer-events: none;
+
     &__customDropdown {
         pointer-events: auto;
         background-color: white;
@@ -167,14 +197,17 @@ section {
         overflow-y: hidden;
         transition: all 0.7s;
         max-width: min-content;
+
         .sortingList {
             transition: all 0.5s ease-in-out;
             opacity: 0;
         }
+
         &.displayed {
             max-height: 300px;
             height: fit-content;
             overflow-y: scroll;
+
             .sortingList {
                 opacity: 1;
             }
@@ -192,10 +225,12 @@ section {
     padding: 20px;
     font-size: 1rem;
     align-items: center;
+
     &__title {
         margin-right: 70px;
         display: block;
     }
+
     i {
         margin-right: 0px;
     }
@@ -212,26 +247,37 @@ section {
     margin-bottom: 0px;
     display: flex;
     flex-flow: column;
+
     ul {
         overflow-y: scroll;
     }
+
     li {
         display: flex;
         justify-content: space-between;
         padding-left: 20px;
+
+        &.hide {
+            display: none;
+            background-color: red;
+        }
         svg {
             margin-right: 20px;
             display: none;
         }
     }
+
     li:not(.sortingList__input-field) {
         padding-top: 8px;
         padding-bottom: 8px;
         margin: 0px 0px;
+        transition: background-color 0.4s;
+
         &:hover {
             background-color: $yellow;
         }
     }
+
     &__input-field {
         position: sticky;
         top: 58.5px;
@@ -240,10 +286,12 @@ section {
         padding-bottom: 15px;
         order: -2;
     }
+
     &__form-field {
         position: relative;
         display: flex;
         align-items: center;
+
         input {
             width: 80%;
             border-radius: 2px;
@@ -256,12 +304,14 @@ section {
             border: 2px solid $lightlightgrey;
         }
     }
+
     &__svg-group {
         position: absolute;
         display: flex;
         align-items: center;
         right: 20px;
     }
+
     &__svg-clear {
         display: none;
         margin-right: 15px;
@@ -271,15 +321,18 @@ section {
 .sectionRecipes {
     position: relative;
     z-index: 1;
+
     &__recipe-total {
         text-align: end;
         font-size: 1.313rem;
         letter-spacing: 0.01rem;
     }
+
     &__tags-section {
         display: flex;
         flex-flow: wrap;
     }
+
     &__applied-tag {
         background-color: $yellow;
         padding: 20px;
@@ -288,10 +341,13 @@ section {
         margin-right: 20px;
         margin-bottom: 5px;
         margin-top: 5px;
+        animation: scaleUp 0.5s;
+
         svg {
             margin-left: 30px;
         }
     }
+
     &__cardArea {
         display: flex;
         flex-flow: wrap;
@@ -309,6 +365,7 @@ section {
         border-radius: 15px;
         background-color: white;
         margin-bottom: 70px;
+
         img {
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
@@ -316,6 +373,7 @@ section {
             height: 34%;
             object-fit: cover;
         }
+
         &-time {
             position: absolute;
             top: 10px;
@@ -324,14 +382,17 @@ section {
             background-color: $yellow;
             padding: 5px 15px;
         }
+
         &-text {
             font-size: 0.875rem;
             margin: 25px;
         }
+
         &-title {
             font-size: 1.125rem;
             margin: 30px 0px;
         }
+
         &-subtitle {
             margin: 10px 0px;
             font-size: 0.75rem;
@@ -339,26 +400,32 @@ section {
             color: $grey;
             text-transform: uppercase;
         }
+
         &-instructions {
             margin-bottom: 20px;
             overflow-y: hidden;
             max-height: 115px;
         }
+
         dl {
             display: grid;
             grid-template-columns: 1fr 1fr;
             margin-top: 0px;
+
             > div {
                 display: flex;
                 flex-flow: column;
                 justify-items: start;
                 margin: 10px 0px;
+
                 * {
                     margin: 0;
                 }
+
                 dt {
                     text-transform: capitalize;
                 }
+
                 dd {
                     color: $grey;
                 }
