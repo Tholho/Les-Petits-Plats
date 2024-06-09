@@ -1,4 +1,5 @@
 import refreshFilters from "./refreshFilters";
+import getFilteredRecipes from "./getFilteredRecipes";
 
 export default async function refreshCardsViaFilters() {
   const cards = document.querySelectorAll(".cardRecipe__article");
@@ -92,16 +93,10 @@ export default async function refreshCardsViaFilters() {
 
   function refreshCards() {
     const recipeTotal = document.querySelector(".sectionRecipes__recipe-total");
-    console.log("DOES IT" + recipeTotal);
     const activeFilters = document.querySelectorAll(
       ".sectionRecipes__applied-tag",
     );
-    const filteredRecipes = [];
-
-    activeFilters.forEach((elem) => {
-      const localRecipes = elem.dataset.recipes.split("-");
-      filteredRecipes.push(localRecipes);
-    });
+    const filteredRecipes = getFilteredRecipes();
     cards.forEach((card) => {
       let flag;
       flag = filteredRecipes.some((list) => {
