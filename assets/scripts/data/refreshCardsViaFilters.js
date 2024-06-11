@@ -1,5 +1,6 @@
 import refreshFilters from "./refreshFilters";
 import getFilteredRecipes from "./getFilteredRecipes";
+import evalMainInput from "./mainFilterInput";
 
 export default async function refreshCardsViaFilters() {
   const cards = document.querySelectorAll(".cardRecipe__article");
@@ -53,6 +54,7 @@ export default async function refreshCardsViaFilters() {
     });
     await refreshCards();
     await refreshFilters();
+    evalMainInput();
   }
 
   async function createTag(tagname, recipes, id) {
@@ -149,6 +151,7 @@ export default async function refreshCardsViaFilters() {
 
     await refreshCards();
     await refreshFilters();
+    evalMainInput();
     /* checkNoFilter();
   function checkNoFilter() {
     const activeFilters = document.querySelector(

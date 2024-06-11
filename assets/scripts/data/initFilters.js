@@ -64,7 +64,7 @@ export default async function initFilters() {
       });
     });
     elem.classList.add("ingredient_item");
-    elem.dataset.id = "ingredient_" + index;
+    elem.dataset.id = "ingredient_" + index + 1;
     ul_ingredients.append(elem);
   });
 
@@ -82,7 +82,7 @@ export default async function initFilters() {
     });
 
     elem.classList.add("appliance_item");
-    elem.dataset.id = "appliance_" + index;
+    elem.dataset.id = "appliance_" + index + 1;
     ul_appareils.append(elem);
   });
 
@@ -102,7 +102,7 @@ export default async function initFilters() {
     });
 
     elem.classList.add("ustensil_item");
-    elem.dataset.id = "ustensil_" + index;
+    elem.dataset.id = "ustensil_" + index + 1;
     ul_ustensiles.append(elem);
   });
 

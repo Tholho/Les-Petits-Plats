@@ -1,5 +1,7 @@
 import { recipes } from "./data/recipes.js";
 import makeAllDOM from "./data/data1.js";
+import evalMainInput from "./data/mainFilterInput.js";
+import filtersInput from "./data/filtersInput.js";
 
 console.log(recipes);
 makeAllDOM();
@@ -19,6 +21,11 @@ function searchFieldClear() {
           };
         } else {
           svgclear.style.display = "none";
+        }
+        if (field.classList.contains("main-input-field")) {
+          evalMainInput();
+        } else {
+          filtersInput(field);
         }
       }),
   );

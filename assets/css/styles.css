@@ -286,9 +286,11 @@ header .logo h1 {
   display: flex;
   flex-flow: wrap;
   justify-items: space-around;
+  pointer-events: none;
 }
 
 .cardRecipe__article {
+  pointer-events: auto;
   position: relative;
   z-index: -1;
   height: 731px;

@@ -5,12 +5,12 @@ import refreshFilters from "./refreshFilters.js";
 import initFilters from "./initFilters.js";
 import initCards from "./initCards.js";
 import refreshCardsViaFilters from "./refreshCardsViaFilters.js";
-import filtersInput from "./filtersInput.js";
+import mainFilterinput from "./mainFilterInput.js";
 
 export default async function makeAllDOM() {
   await initCards();
   await initFilters();
-  filtersInput();
+  mainFilterinput();
 }
 
 //placeholder logic
@@ -18,11 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const mainForm = document.querySelector(".sectionTop__form-field input");
 
   refreshCardsViaFilters();
-  mainForm.addEventListener("input", () => {
-    if (mainForm.value.length >= 3) {
-      refreshFilters();
-    }
-  }); //refreshFilters();
+  //refreshFilters();
 });
 
 function makeCards() {

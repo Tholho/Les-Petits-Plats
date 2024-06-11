@@ -352,11 +352,13 @@ section {
         display: flex;
         flex-flow: wrap;
         justify-items: space-around;
+        pointer-events: none;
     }
 }
 
 .cardRecipe {
     &__article {
+        pointer-events: auto;
         position: relative;
         z-index: -1;
         height: 731px;
