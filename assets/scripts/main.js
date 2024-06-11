@@ -2,13 +2,13 @@ import { recipes } from "./data/recipes.js";
 import makeAllDOM from "./data/data1.js";
 import evalMainInput from "./data/mainFilterInput.js";
 import filtersInput from "./data/filtersInput.js";
+import updateTotalRecipes from "./data/totalRecipes.js";
 
 console.log(recipes);
 makeAllDOM();
 
 function searchFieldClear() {
   const formFields = document.querySelectorAll(".form-field input");
-
   formFields.forEach(
     (field) =>
       (field.oninput = function () {
@@ -18,6 +18,7 @@ function searchFieldClear() {
           svgclear.onclick = function () {
             field.value = "";
             svgclear.style.display = "none";
+            checkNoFilter();
           };
         } else {
           svgclear.style.display = "none";
@@ -29,6 +30,15 @@ function searchFieldClear() {
         }
       }),
   );
+}
+
+function checkNoFilter() {
+  const cards = document.querySelectorAll(".cardRecipe__article");
+  const activeFilters = document.querySelector(".sectionRecipes__applied-tag");
+  if (!activeFilters) {
+    cards.forEach((card) => card.classList.remove("hide"));
+  }
+  updateTotalRecipes();
 }
 
 function setupCustomDropdown() {

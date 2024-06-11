@@ -9,7 +9,8 @@ export default async function evalMainInput() {
   const displayedCardsIds = getDisplayedCardsIds();
   // console.log(displayedCardsIds);
   const search = mainInputField.value.toLowerCase();
-  const splitSearch = search.split(" ");
+  const splitSearch = search.split(" ").filter((word) => word != "");
+  console.log(splitSearch);
   if (mainInputField.value == "") {
     checkNoFilter();
     return;
@@ -18,7 +19,24 @@ export default async function evalMainInput() {
 
   recipes.forEach((recipe) => {
     if (displayedCardsIds.includes(recipe.id)) {
-      console.log(recipe.id);
+      const DOMCard = document.querySelector(
+        `.cardRecipe__article[data-id="${recipe.id}"]`,
+      );
+      const normalizedRecipe = normalizeRecipe(recipe);
+      //console.log(normalizedRecipe);
+      let found = searchWordsInContexts(splitSearch, normalizedRecipe);
+      console.log(found);
+      if (!found) {
+        if (!DOMCard.classList.contains("hide")) {
+          DOMCard.classList.add("hide");
+        }
+      } else {
+        if (DOMCard.classList.contains("hide")) {
+          DOMCard.classList.remove("hide");
+        }
+      }
+      /*
+      //console.log(recipe.id);
       //  console.log("test");
       const normalizedName = recipe.name.toLowerCase();
       const normalizedNameNoAccent = removeAccents(normalizedName);
@@ -59,7 +77,7 @@ export default async function evalMainInput() {
             DOMCard.classList.remove("hide");
           }
         }
-      }
+        } */
     }
   });
   function checkNoFilter() {
@@ -78,40 +96,17 @@ function makeIngredientContext(ingredientsObj) {
   const ingredientArray = ingredientsObj.map(
     (ingredient) => ingredient.ingredient,
   );
-  console.log(ingredientArray);
+  //console.log(ingredientArray);
   const ingredientNames = ingredientArray.join(" ");
   return ingredientNames;
 }
 
 function searchWordsInContexts(words, contexts) {
-  let presence;
-  let presenceNorm;
-  words.some((word) => {
-    presence = false;
-    //IF CONTEXT FAIRE UNE LISTE D INGREDIENTS EN TEXT KOI
-    contexts.some((context) => {
-      if (context.includes(word)) {
-        presence = true;
-      }
+  return words.every((word) => {
+    return Object.values(contexts).some((contextValue) => {
+      return contextValue.includes(word);
     });
-    if (presence == false) {
-      return;
-    }
   });
-
-  words.some((word) => {
-    presenceNorm = false;
-    //IF CONTEXT FAIRE UNE LISTE D INGREDIENTS EN TEXT KOI
-    contexts.some((context) => {
-      if (context.includes(word)) {
-        presenceNorm = true;
-      }
-    });
-    if (presenceNorm == false) {
-      return;
-    }
-  });
-  return presence || presenceNorm;
 }
 
 function getDisplayedCardsIds() {
@@ -147,7 +142,16 @@ function getDisplayedCardsIds() {
 }
 
 function normalizeRecipe(recipe) {
-  const normalizedRecipe = [...recipe].map(normalizeAndLowerCase);
+  const normalizedRecipe = {
+    name: recipe.name,
+    description: recipe.description,
+    ingredients: makeIngredientContext(recipe.ingredients),
+    normedName: normalizeAndLowerCase(recipe.name),
+    normedDescription: normalizeAndLowerCase(recipe.description),
+    normedIngredients: normalizeAndLowerCase(
+      makeIngredientContext(recipe.ingredients),
+    ),
+  };
   return normalizedRecipe;
 }
 
