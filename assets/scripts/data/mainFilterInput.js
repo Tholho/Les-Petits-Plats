@@ -1,6 +1,5 @@
 import getFilteredRecipes from "./getFilteredRecipes";
 import { recipes } from "./recipes";
-import refreshFilters from "./refreshFilters";
 import updateTotalRecipes from "./totalRecipes";
 
 export default async function evalMainInput() {
@@ -15,7 +14,6 @@ export default async function evalMainInput() {
     checkNoFilter();
     return;
   }
-  //    console.log("OBJOBJ" + ingredientsObj);
 
   recipes.forEach((recipe) => {
     if (displayedCardsIds.includes(recipe.id)) {
@@ -35,49 +33,6 @@ export default async function evalMainInput() {
           DOMCard.classList.remove("hide");
         }
       }
-      /*
-      //console.log(recipe.id);
-      //  console.log("test");
-      const normalizedName = recipe.name.toLowerCase();
-      const normalizedNameNoAccent = removeAccents(normalizedName);
-      const normalizedDescription = recipe.description.toLowerCase();
-      const normalizedDescriptionNoA = removeAccents(normalizedDescription);
-
-      //   console.log("yoyo");
-      const DOMCard = document.querySelector(
-        `.cardRecipe__article[data-id="${recipe.id}"]`,
-      );
-      console.log(DOMCard);
-      const ingredientsObj = recipe.ingredients.map(
-        (ingredient) => ingredient.ingredient,
-      );
-      //  console.log("test" + ingredientsObj);
-      //console.log(makeIngredientContext(ingredientsObj));
-      //   console.log(DOMCard);
-      if (
-        !normalizedName.includes(search) &&
-        !normalizedNameNoAccent.includes(search) &&
-        !normalizedDescription.includes(search) &&
-        !normalizedDescriptionNoA.includes(search)
-      ) {
-        if (!DOMCard.classList.contains("hide")) {
-          console.log("time");
-          DOMCard.classList.add("hide");
-        }
-      } else {
-        if (DOMCard.classList.contains("hide")) {
-          if (
-            normalizedName.includes(search) ||
-            normalizedNameNoAccent.includes(search) ||
-            normalizedDescription.includes(search) ||
-            normalizedDescriptionNoA.includes(search)
-          ) {
-            console.log(displayedCardsIds);
-            console.log(recipe.id);
-            DOMCard.classList.remove("hide");
-          }
-        }
-        } */
     }
   });
   function checkNoFilter() {
@@ -110,7 +65,6 @@ function searchWordsInContexts(words, contexts) {
 }
 
 function getDisplayedCardsIds() {
-  const regex = /\d+/;
   const displayedCardsIds = [];
   const filteredRecipes = getFilteredRecipes();
   if (filteredRecipes.length == 0) {
@@ -137,7 +91,6 @@ function getDisplayedCardsIds() {
     }
     keepRecipe = 1;
   });
-  console.log("ERMAGERD" + displayedCardsIds);
   return displayedCardsIds;
 }
 
@@ -161,13 +114,4 @@ function normalizeAndLowerCase(str) {
 
 function removeAccents(str) {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
-
-function debounce(func, wait) {
-  let timeout;
-  return function (...args) {
-    const context = this;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(context, args), wait);
-  };
 }
