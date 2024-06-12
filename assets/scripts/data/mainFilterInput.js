@@ -10,7 +10,7 @@ export default async function evalMainInput() {
   // console.log(displayedCardsIds);
   const search = mainInputField.value.toLowerCase();
   const splitSearch = customSplit(search);
-  console.log(splitSearch);
+  //console.log(splitSearch);
   if (mainInputField.value == "") {
     checkNoFilter();
     return;
@@ -84,32 +84,25 @@ function makeIngredientContext(ingredientsObj) {
 }
 
 function searchWordsInContexts(words, contexts) {
-  /*
   let found = false;
   let i = 0;
   let j = 0;
-  console.log(contexts[5]);
+  // console.log(contexts[5]);
   while (words[i]) {
-    while (contexts[j]) {
-      found = customStrStr(contexts[j], words[i]);
-      console.log(found);
+    found = false;
+    while (!found && contexts[j]) {
+      console.log(words[i]);
+      found = customStrStr(contexts[j], String(words[i]));
+      // console.log(found);
       //    console.log(contexts[j] + words[i]);
       j++;
     }
     if (found != 1) {
       return false;
     }
-    found = 0;
     i++;
   }
   return found;
-  */
-
-  return words.every((word) => {
-    return Object.values(contexts).some((contextValue) => {
-      return contextValue.includes(word);
-    });
-  });
 }
 
 function getDisplayedCardsIds() {
@@ -188,29 +181,27 @@ function removeAccents(str) {
 }
 
 function customStrStr(stack, needle) {
-  if (!stack) {
+  if (needle === "") {
     return false;
   }
   let iStack = 0;
   let iNeedle = 0;
   const needleLen = needle.length;
-  if (needleLen == 0) {
-    return false;
-  }
+  const stackLen = stack.length;
+
   while (stack[iStack]) {
-    while (
-      iStack + iNeedle < stack.length &&
-      stack[iStack + iNeedle] == needle[iNeedle] &&
-      iNeedle <= needleLen
-    ) {
-      console.log(needle + " " + stack);
-      console.log(needleLen);
+    while (stack[iStack] == needle[iNeedle]) {
+      //     console.log(needle + " " + stack);
+      //   console.log(needleLen);
       console.log(iNeedle);
       if (iNeedle == needleLen - 1) {
         return true;
       }
+      iStack++;
       iNeedle++;
     }
+    //console.log(iStack + "+++" + iNeedle);
+    iStack -= iNeedle;
     iNeedle = 0;
     iStack++;
   }
