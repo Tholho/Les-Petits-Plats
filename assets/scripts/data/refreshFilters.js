@@ -1,3 +1,5 @@
+import { recipes } from "./recipes";
+
 export default function refreshFilters() {
   //aggregate filter
   //display éè but treat them as e
@@ -11,6 +13,10 @@ export default function refreshFilters() {
 
   // This is a primitive refresh based on simple correspondance with displayed DOM...
   // I might improve it later
+  //
+  const displayedCards = document.querySelectorAll(
+    ".cardRecipe__article:not(.hide)",
+  );
   const ingredientsDropdown = document.querySelector(".ingredients-dropdown");
   const appareilsDropdown = document.querySelector(".appareils-dropdown");
   const ustensilesDropdown = document.querySelector(".ustensiles-dropdown");
@@ -35,9 +41,6 @@ export default function refreshFilters() {
   refreshList();
   //adjust list items according to displayed cards
   function refreshList() {
-    const displayedCards = document.querySelectorAll(
-      ".cardRecipe__article:not(.hide)",
-    );
     //  console.log(displayedCards);
     displayedCards.forEach((card) => {
       hideListItems(card.dataset.id);
@@ -53,7 +56,8 @@ export default function refreshFilters() {
     const activeFilters = document.querySelector(
       ".sectionRecipes__applied-tag",
     );
-    if (!activeFilters) {
+
+    if (!activeFilters && displayedCards.length == recipes.length) {
       const allListItems = document.querySelectorAll(".list-item");
       allListItems.forEach((item) => item.classList.remove("hide"));
       return;
