@@ -1,5 +1,6 @@
 import getFilteredRecipes from "./getFilteredRecipes";
 import { recipes } from "./recipes";
+import refreshFilters from "./refreshFilters";
 import updateTotalRecipes from "./totalRecipes";
 
 export default async function evalMainInput() {
@@ -10,8 +11,9 @@ export default async function evalMainInput() {
   const search = mainInputField.value.toLowerCase();
   const splitSearch = search.split(" ").filter((word) => word != "");
   console.log(splitSearch);
-  if (mainInputField.value == "") {
+  if (mainInputField.value == "" || mainInputField.value.length < 3) {
     checkNoFilter();
+    refreshFilters();
     return;
   }
 
@@ -45,6 +47,7 @@ export default async function evalMainInput() {
     updateTotalRecipes();
   }
   updateTotalRecipes();
+  refreshFilters();
 }
 
 function makeIngredientContext(ingredientsObj) {
