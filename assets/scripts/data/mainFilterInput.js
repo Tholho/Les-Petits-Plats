@@ -32,7 +32,7 @@ export default async function evalMainInput() {
       //console.log(normalizedRecipe);
       let found = searchWordsInContexts(splitSearch, normalizedRecipe);
       if (!found) {
-        console.log(displayedCardsIds + "SHOULD HIDE" + recipes[i].id);
+        // console.log(displayedCardsIds + "SHOULD HIDE" + recipes[i].id);
         if (!DOMCard.classList.contains("hide")) {
           DOMCard.classList.add("hide");
         }

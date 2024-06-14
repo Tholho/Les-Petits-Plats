@@ -2,6 +2,7 @@ import refreshFilters from "./refreshFilters";
 import getFilteredRecipes from "./getFilteredRecipes";
 import evalMainInput from "./mainFilterInput";
 import refreshCards from "./refreshCards";
+import updateTotalRecipes from "./totalRecipes";
 
 export default async function refreshCardsViaFilters() {
   const cards = document.querySelectorAll(".cardRecipe__article");
@@ -49,15 +50,16 @@ export default async function refreshCardsViaFilters() {
       const regex = new RegExp(`(^|-)${article.dataset.id}($|-)`);
       if (!article.classList.contains("hide")) {
         if (!regex.test(this.dataset.recipes)) {
-          console.log(article);
-          console.log("test");
+          //   console.log(article);
+          //     console.log("test");
           article.classList.add("hide");
         }
       }
     });
-    refreshCardsLocal();
+    // await refreshCards();
     await refreshFilters();
     // evalMainInput();
+    updateTotalRecipes();
   }
 
   async function createTag(tagname, recipes, id) {

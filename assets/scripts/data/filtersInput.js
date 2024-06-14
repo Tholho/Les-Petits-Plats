@@ -4,7 +4,7 @@ import refreshFilters from "./refreshFilters";
 export default async function filtersInput(field) {
   await refreshFilters();
   const filteredRecipes = getFilteredRecipes();
-  console.log(field);
+  //console.log(field);
   const currentList = field.closest("ul");
   const currentListElements = currentList.querySelectorAll(
     ".list-item:not(.hide)",

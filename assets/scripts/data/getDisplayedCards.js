@@ -6,11 +6,11 @@ export default function getDisplayedCardsIds() {
   const filteredRecipes = getFilteredRecipes();
   if (filteredRecipes.length == 0) {
     let total = recipes.length;
-    console.log(total);
+    // console.log(total);
     for (let i = 1; i <= +total; i++) {
       displayedCardsIds.push(+i);
     }
-    console.log(displayedCardsIds);
+    //console.log(displayedCardsIds);
     return displayedCardsIds;
   }
   const mostRecipes = filteredRecipes.reduce((largest, current) => {

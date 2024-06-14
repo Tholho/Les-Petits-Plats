@@ -39,7 +39,7 @@ export default async function refreshFilters() {
   //const displayedIds = [];
 
   //  console.log(li_ingredients);
-  await refreshCards();
+  //await refreshCards();
 
   await refreshList();
   //adjust list items according to displayed cards
@@ -47,7 +47,7 @@ export default async function refreshFilters() {
     const filteredRecipes = getFilteredRecipes();
     //  console.log(displayedCards);
     displayedCards.forEach((card) => {
-      console.log("CARD" + card);
+      //console.log("CARD" + card);
       hideListItems(card);
     });
 
@@ -86,7 +86,7 @@ export default async function refreshFilters() {
     li_ingredients.forEach((li) => {
       if (li.classList.contains("hide")) {
         if (regex.test(li.dataset.recipes)) {
-          console.log("HAPPENS");
+          //  console.log("HAPPENS");
           li.classList.remove("hide");
         }
       } else {

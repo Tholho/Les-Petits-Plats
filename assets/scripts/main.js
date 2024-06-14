@@ -4,7 +4,7 @@ import evalMainInput from "./data/mainFilterInput.js";
 import filtersInput from "./data/filtersInput.js";
 import updateTotalRecipes from "./data/totalRecipes.js";
 
-console.log(recipes);
+//console.log(recipes);
 makeAllDOM();
 
 function searchFieldClear() {

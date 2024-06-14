@@ -32,7 +32,7 @@ export default async function initFilters() {
     });
   }
 
-  await lowerCaseRecipes().then(() => console.log(recipes));
+  await lowerCaseRecipes();
 
   // ici l'objet recipes doit etre un clone APRES ACTION FILTRE de l'objet recipes
   // original.
@@ -48,7 +48,7 @@ export default async function initFilters() {
   unique_ingredients.sort();
   unique_appareils.sort();
   unique_ustensiles.sort();
-  console.log(unique_ustensiles);
+  // console.log(unique_ustensiles);
 
   unique_ingredients.forEach((ingredient, index) => {
     const elem = makeElemLI(ingredient);
@@ -154,7 +154,7 @@ export default async function initFilters() {
 
   //  unique_ingredients.forEach((ingredient) => console.log(ingredient));
   //unique_ustensiles.forEach((ingredient) => console.log(ingredient));
-  unique_appareils.forEach((ingredient) => console.log(ingredient));
+  //unique_appareils.forEach((ingredient) => console.log(ingredient));
 
   //Generer une liste d'ingredients uniques, puis la trier par ordre
   // alphabetique, puis generer les 'li'
