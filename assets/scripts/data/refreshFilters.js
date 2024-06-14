@@ -1,6 +1,9 @@
+import getFilteredRecipes from "./getFilteredRecipes";
 import { recipes } from "./recipes";
+import getDisplayedCardsIds from "./getDisplayedCards";
+import refreshCards from "./refreshCards";
 
-export default function refreshFilters() {
+export default async function refreshFilters() {
   //aggregate filter
   //display éè but treat them as e
   // if user enters accent, must look explicitely for it ???
@@ -14,9 +17,7 @@ export default function refreshFilters() {
   // This is a primitive refresh based on simple correspondance with displayed DOM...
   // I might improve it later
   //
-  const displayedCards = document.querySelectorAll(
-    ".cardRecipe__article:not(.hide)",
-  );
+  const displayedCards = getDisplayedCardsIds();
   const ingredientsDropdown = document.querySelector(".ingredients-dropdown");
   const appareilsDropdown = document.querySelector(".appareils-dropdown");
   const ustensilesDropdown = document.querySelector(".ustensiles-dropdown");
@@ -38,13 +39,27 @@ export default function refreshFilters() {
   //const displayedIds = [];
 
   //  console.log(li_ingredients);
-  refreshList();
+  await refreshCards();
+
+  await refreshList();
   //adjust list items according to displayed cards
-  function refreshList() {
+  async function refreshList() {
+    const filteredRecipes = getFilteredRecipes();
     //  console.log(displayedCards);
     displayedCards.forEach((card) => {
-      hideListItems(card.dataset.id);
+      hideListItems(card);
     });
+
+    /*
+    const elemRecipes = elem.dataset.recipes.split("-");
+      elemRecipes.forEach((recipe) => {
+        filteredRecipes.forEach(sublist => {
+          if (recipe in sublist) {
+
+          }
+        })
+      });
+    */
   }
 
   //must make a function that adjust displayed cards according to active filters
@@ -57,16 +72,20 @@ export default function refreshFilters() {
       ".sectionRecipes__applied-tag",
     );
 
+    const filteredRecipes = getFilteredRecipes();
+    //  console.log(filteredRecipes);
+
     if (!activeFilters && displayedCards.length == recipes.length) {
       const allListItems = document.querySelectorAll(".list-item");
       allListItems.forEach((item) => item.classList.remove("hide"));
       return;
     }
 
-    console.log("call hidelist");
+    //console.log("call hidelist");
     li_ingredients.forEach((li) => {
       if (li.classList.contains("hide")) {
         if (regex.test(li.dataset.recipes)) {
+          console.log("HAPPENS");
           li.classList.remove("hide");
         }
       } else {

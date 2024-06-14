@@ -1,5 +1,6 @@
 import getFilteredRecipes from "./getFilteredRecipes";
 import { recipes } from "./recipes";
+import refreshCards from "./refreshCards";
 import refreshFilters from "./refreshFilters";
 import updateTotalRecipes from "./totalRecipes";
 
@@ -8,13 +9,13 @@ export default async function evalMainInput() {
   const cards = document.querySelectorAll(".cardRecipe__article");
   const mainInputField = document.querySelector(".main-input-field");
   const displayedCardsIds = getDisplayedCardsIds();
-  // console.log(displayedCardsIds);
   const search = mainInputField.value.toLowerCase();
   const splitSearch = customSplit(search);
-  //console.log(splitSearch);
   if (mainInputField.value == "" || mainInputField.value.length < 3) {
     checkNoFilter();
-    refreshFilters();
+    await refreshCards();
+
+    await refreshFilters();
     return;
   }
 
@@ -54,7 +55,7 @@ export default async function evalMainInput() {
     updateTotalRecipes();
   }
   updateTotalRecipes();
-  refreshFilters();
+  //refreshFilters();
 }
 
 function customSplit(search) {
@@ -120,7 +121,7 @@ function getDisplayedCardsIds() {
     return displayedCardsIds;
   }
   const mostRecipes = customReduce(filteredRecipes);
-  console.log(mostRecipes);
+  //console.log(mostRecipes);
   let i = 0;
   let keepRecipe = 1;
   let k = 0;
@@ -190,7 +191,6 @@ function customStrStr(stack, needle) {
   let iStack = 0;
   let iNeedle = 0;
   const needleLen = needle.length;
-  const stackLen = stack.length;
 
   while (stack[iStack]) {
     while (stack[iStack] == needle[iNeedle]) {
