@@ -1,5 +1,12 @@
+import refreshFilters from "./refreshFilters";
+
 export default async function filtersInput(field) {
-  console.log(field);
+  const displayedCards = document.querySelectorAll(
+    ".cardRecipe__article:not(.hide)",
+  );
+  const activeFilters = document.querySelectorAll(
+    ".sectionRecipes__applied-tag",
+  );
   const currentList = field.closest("ul");
   const currentListElements = currentList.querySelectorAll(".list-item");
   const normalizedInput = field.value.toLowerCase();

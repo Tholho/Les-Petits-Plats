@@ -7,7 +7,7 @@ import updateTotalRecipes from "./data/totalRecipes.js";
 console.log(recipes);
 makeAllDOM();
 
-function searchFieldClear() {
+function searchFieldSetup() {
   const formFields = document.querySelectorAll(".form-field input");
   formFields.forEach(
     (field) =>
@@ -82,7 +82,7 @@ function setupCustomDropdown() {
 }
 
 async function init() {
-  searchFieldClear();
+  searchFieldSetup();
   setupCustomDropdown();
 }
 

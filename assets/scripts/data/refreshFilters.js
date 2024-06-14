@@ -61,7 +61,7 @@ export default function refreshFilters() {
       return;
     }
 
-    console.log("call hidelist");
+    //console.log("call hidelist");
     li_ingredients.forEach((li) => {
       if (li.classList.contains("hide")) {
         if (regex.test(li.dataset.recipes)) {

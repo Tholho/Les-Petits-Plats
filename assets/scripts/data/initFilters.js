@@ -48,7 +48,7 @@ export default async function initFilters() {
   unique_ingredients.sort();
   unique_appareils.sort();
   unique_ustensiles.sort();
-  console.log(unique_ustensiles);
+  //console.log(unique_ustensiles);
 
   unique_ingredients.forEach((ingredient, index) => {
     const elem = makeElemLI(ingredient);

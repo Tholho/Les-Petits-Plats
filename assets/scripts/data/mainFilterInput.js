@@ -10,7 +10,7 @@ export default async function evalMainInput() {
   // console.log(displayedCardsIds);
   const search = mainInputField.value.toLowerCase();
   const splitSearch = search.split(" ").filter((word) => word != "");
-  console.log(splitSearch);
+  //console.log(splitSearch);
   if (mainInputField.value == "" || mainInputField.value.length < 3) {
     checkNoFilter();
     refreshFilters();
