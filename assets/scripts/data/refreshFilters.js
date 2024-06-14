@@ -47,6 +47,7 @@ export default async function refreshFilters() {
     const filteredRecipes = getFilteredRecipes();
     //  console.log(displayedCards);
     displayedCards.forEach((card) => {
+      console.log("CARD" + card);
       hideListItems(card);
     });
 

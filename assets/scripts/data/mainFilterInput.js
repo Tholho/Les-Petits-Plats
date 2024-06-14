@@ -5,6 +5,7 @@ import refreshFilters from "./refreshFilters";
 import updateTotalRecipes from "./totalRecipes";
 
 export default async function evalMainInput() {
+  //await refreshFilters();
   const allCardsCount = recipes.length;
   const cards = document.querySelectorAll(".cardRecipe__article");
   const mainInputField = document.querySelector(".main-input-field");
@@ -21,7 +22,9 @@ export default async function evalMainInput() {
 
   let i = 0;
   while (i < allCardsCount) {
+    //    console.log(recipes[i].id);
     if (displayedCardsIds.includes(recipes[i].id)) {
+      // console.log("SUP");
       const DOMCard = document.querySelector(
         `.cardRecipe__article[data-id="${recipes[i].id}"]`,
       );
@@ -29,6 +32,7 @@ export default async function evalMainInput() {
       //console.log(normalizedRecipe);
       let found = searchWordsInContexts(splitSearch, normalizedRecipe);
       if (!found) {
+        console.log(displayedCardsIds + "SHOULD HIDE" + recipes[i].id);
         if (!DOMCard.classList.contains("hide")) {
           DOMCard.classList.add("hide");
         }
@@ -55,7 +59,8 @@ export default async function evalMainInput() {
     updateTotalRecipes();
   }
   updateTotalRecipes();
-  //refreshFilters();
+  //await refreshFilters();
+  // await refreshCards();
 }
 
 function customSplit(search) {
@@ -95,7 +100,7 @@ function searchWordsInContexts(words, contexts) {
   while (words[i]) {
     found = false;
     while (!found && contexts[j]) {
-      console.log(words[i]);
+      // console.log(words[i]);
       found = customStrStr(contexts[j], String(words[i]));
       // console.log(found);
       //    console.log(contexts[j] + words[i]);
@@ -114,7 +119,7 @@ function getDisplayedCardsIds() {
   const filteredRecipes = getFilteredRecipes();
   if (filteredRecipes.length == 0) {
     let total = recipes.length;
-    console.log(total);
+    // console.log(total);
     for (let i = 0; i < +total; i++) {
       displayedCardsIds[i] = +i + 1;
     }
@@ -196,7 +201,7 @@ function customStrStr(stack, needle) {
     while (stack[iStack] == needle[iNeedle]) {
       //     console.log(needle + " " + stack);
       //   console.log(needleLen);
-      console.log(iNeedle);
+      //console.log(iNeedle);
       if (iNeedle == needleLen - 1) {
         return true;
       }

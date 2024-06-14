@@ -1,6 +1,7 @@
 import refreshFilters from "./refreshFilters";
 import getFilteredRecipes from "./getFilteredRecipes";
 import evalMainInput from "./mainFilterInput";
+import refreshCards from "./refreshCards";
 
 export default async function refreshCardsViaFilters() {
   const cards = document.querySelectorAll(".cardRecipe__article");
@@ -48,13 +49,15 @@ export default async function refreshCardsViaFilters() {
       const regex = new RegExp(`(^|-)${article.dataset.id}($|-)`);
       if (!article.classList.contains("hide")) {
         if (!regex.test(this.dataset.recipes)) {
+          console.log(article);
+          console.log("test");
           article.classList.add("hide");
         }
       }
     });
-    await refreshCards();
+    refreshCardsLocal();
     await refreshFilters();
-    evalMainInput();
+    // evalMainInput();
   }
 
   async function createTag(tagname, recipes, id) {
@@ -93,7 +96,7 @@ export default async function refreshCardsViaFilters() {
   //remove visual effects from list and tags and refresh cards depending on
   //active filters
 
-  function refreshCards() {
+  function refreshCardsLocal() {
     const recipeTotal = document.querySelector(".sectionRecipes__recipe-total");
     const activeFilters = document.querySelectorAll(
       ".sectionRecipes__applied-tag",
