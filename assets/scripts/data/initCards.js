@@ -2,13 +2,11 @@ import { recipes } from "./recipes";
 
 export default async function initCards() {
   const cardArea = document.querySelector(".sectionRecipes__cardArea");
-
   const recipeTotal = document.querySelector(".sectionRecipes__recipe-total");
   let total = 0;
 
   recipes.forEach((recipe) => {
     const article = makeArticle(recipe);
-
     total++;
     cardArea.append(article);
   });

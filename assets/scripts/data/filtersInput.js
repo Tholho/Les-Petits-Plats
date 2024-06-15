@@ -1,10 +1,8 @@
-import getFilteredRecipes from "./getFilteredRecipes";
 import refreshFilters from "./refreshFilters";
+import removeAccents from "../utils/removeAccents";
 
 export default async function filtersInput(field) {
   await refreshFilters();
-  const filteredRecipes = getFilteredRecipes();
-  //console.log(field);
   const currentList = field.closest("ul");
   const currentListElements = currentList.querySelectorAll(
     ".list-item:not(.hide)",
@@ -30,7 +28,4 @@ export default async function filtersInput(field) {
       }
     }
   });
-  function removeAccents(str) {
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  }
 }
