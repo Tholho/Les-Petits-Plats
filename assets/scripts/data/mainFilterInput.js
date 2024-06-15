@@ -9,9 +9,10 @@ export default async function evalMainInput() {
   const allCardsCount = recipes.length;
   const cards = document.querySelectorAll(".cardRecipe__article");
   const mainInputField = document.querySelector(".main-input-field");
-  const displayedCardsIds = getDisplayedCardsIds();
+  const displayedCardsIds = getDisplayedCardsIdsLocal();
   const search = mainInputField.value.toLowerCase();
   const splitSearch = customSplit(search);
+  const idList = [];
   if (mainInputField.value == "" || mainInputField.value.length < 3) {
     checkNoFilter();
     await refreshCards();
@@ -21,8 +22,11 @@ export default async function evalMainInput() {
   }
 
   let i = 0;
+  console.log("displayedcardIDS" + displayedCardsIds);
+
   while (i < allCardsCount) {
     //    console.log(recipes[i].id);
+
     if (displayedCardsIds.includes(recipes[i].id)) {
       // console.log("SUP");
       const DOMCard = document.querySelector(
@@ -31,16 +35,9 @@ export default async function evalMainInput() {
       const normalizedRecipe = normalizeRecipe(recipes[i]);
       //console.log(normalizedRecipe);
       let found = searchWordsInContexts(splitSearch, normalizedRecipe);
-      if (!found) {
+      if (found) {
         // console.log(displayedCardsIds + "SHOULD HIDE" + recipes[i].id);
-        if (!DOMCard.classList.contains("hide")) {
-          DOMCard.classList.add("hide");
-        }
-      } else {
-        console.log(found);
-        if (DOMCard.classList.contains("hide")) {
-          DOMCard.classList.remove("hide");
-        }
+        idList.push(+i + 1);
       }
     }
     i++;
@@ -58,9 +55,9 @@ export default async function evalMainInput() {
     }
     updateTotalRecipes();
   }
+  refreshCards(idList);
   updateTotalRecipes();
-  //await refreshFilters();
-  // await refreshCards();
+  refreshFilters(idList);
 }
 
 function customSplit(search) {
@@ -114,10 +111,10 @@ function searchWordsInContexts(words, contexts) {
   return found;
 }
 
-function getDisplayedCardsIds() {
+function getDisplayedCardsIdsLocal() {
   const displayedCardsIds = [];
   const filteredRecipes = getFilteredRecipes();
-  if (filteredRecipes.length == 0) {
+  if (!filteredRecipes || filteredRecipes.length == 0) {
     let total = recipes.length;
     // console.log(total);
     for (let i = 0; i < +total; i++) {
@@ -125,21 +122,21 @@ function getDisplayedCardsIds() {
     }
     return displayedCardsIds;
   }
-  const mostRecipes = customReduce(filteredRecipes);
+  const leastRecipes = customReduce(filteredRecipes);
   //console.log(mostRecipes);
   let i = 0;
   let keepRecipe = 1;
   let k = 0;
-  while (mostRecipes[i]) {
+  while (leastRecipes[i]) {
     let j = 0;
     while (filteredRecipes[j]) {
-      if ((!mostRecipes[i]) in filteredRecipes[j]) {
+      if ((!leastRecipes[i]) in filteredRecipes[j]) {
         keepRecipe = 0;
       }
       j++;
     }
     if (keepRecipe == 1) {
-      displayedCardsIds[k] = +mostRecipes[i];
+      displayedCardsIds[k] = +leastRecipes[i];
       k++;
     }
     keepRecipe = 1;
@@ -149,23 +146,27 @@ function getDisplayedCardsIds() {
 }
 
 function customReduce(recipes) {
+  if (!recipes) {
+    return [];
+  }
   let i = 0;
-  let length = 0;
-  let largestIndex;
-  let largestRecipe = [];
+  let length = recipes[0].length;
+  let smallestIndex = 0;
+  let smallestRecipe = [];
   while (recipes[i]) {
-    if (recipes[i].length > length) {
-      largestIndex = i;
+    if (recipes[i].length < length) {
+      smallestIndex = i;
       length = recipes[i].length;
     }
     i++;
   }
   i = 0;
-  while (recipes[largestIndex][i]) {
-    largestRecipe[i] = recipes[largestIndex][i];
+
+  while (recipes[smallestIndex][i]) {
+    smallestRecipe[i] = recipes[smallestIndex][i];
     i++;
   }
-  return largestRecipe;
+  return smallestRecipe;
 }
 
 function normalizeRecipe(recipe) {

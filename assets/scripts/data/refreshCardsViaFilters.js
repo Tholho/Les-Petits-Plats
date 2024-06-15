@@ -46,6 +46,7 @@ export default async function refreshCardsViaFilters() {
       const tag_clear = tag.querySelector("svg");
       tag_clear.addEventListener("click", removeFilter);
     }
+    /*
     articles.forEach((article) => {
       const regex = new RegExp(`(^|-)${article.dataset.id}($|-)`);
       if (!article.classList.contains("hide")) {
@@ -56,7 +57,8 @@ export default async function refreshCardsViaFilters() {
         }
       }
     });
-    // await refreshCards();
+    */
+    refreshCards();
     await refreshFilters();
     // evalMainInput();
     updateTotalRecipes();
@@ -98,36 +100,6 @@ export default async function refreshCardsViaFilters() {
   //remove visual effects from list and tags and refresh cards depending on
   //active filters
 
-  function refreshCardsLocal() {
-    const recipeTotal = document.querySelector(".sectionRecipes__recipe-total");
-    const activeFilters = document.querySelectorAll(
-      ".sectionRecipes__applied-tag",
-    );
-    const filteredRecipes = getFilteredRecipes();
-    cards.forEach((card) => {
-      let flag;
-      flag = filteredRecipes.some((list) => {
-        if (!list.includes(card.dataset.id)) {
-          return true;
-        }
-      });
-      if (!flag) {
-        card.classList.remove("hide");
-      }
-    });
-    let total = 0;
-    cards.forEach((card) => {
-      if (!card.classList.contains("hide")) {
-        total++;
-      }
-    });
-    if (total == 1) {
-      recipeTotal.innerText = total + " recette";
-    } else {
-      recipeTotal.innerText = total + " recettes";
-    }
-  }
-
   async function removeFilter(event) {
     event.stopPropagation();
     if (this.parentNode.nodeName == "LI") {
@@ -154,9 +126,10 @@ export default async function refreshCardsViaFilters() {
       tag.remove();
     }
 
-    await refreshCards();
+    refreshCards();
     await refreshFilters();
-    evalMainInput();
+    updateTotalRecipes();
+    // evalMainInput();
     /* checkNoFilter();
   function checkNoFilter() {
     const activeFilters = document.querySelector(

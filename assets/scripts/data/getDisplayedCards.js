@@ -10,24 +10,34 @@ export default function getDisplayedCardsIds() {
     for (let i = 1; i <= +total; i++) {
       displayedCardsIds.push(+i);
     }
-    //console.log(displayedCardsIds);
+    // console.log(displayedCardsIds);
     return displayedCardsIds;
   }
-  const mostRecipes = filteredRecipes.reduce((largest, current) => {
-    return current.length > largest.length ? current : largest;
-  }, filteredRecipes);
-  //console.log(mostRecipes);
+  console.log(filteredRecipes);
+  const leastRecipes = filteredRecipes.reduce((smallest, current) => {
+    if (smallest < 1 || current.length < smallest.length) {
+      return current;
+    }
+    return smallest;
+  }, null);
   let keepRecipe = 1;
-  mostRecipes.forEach((recipe) => {
+  console.log(" ---------  ");
+  console.log(leastRecipes);
+  console.log(filteredRecipes);
+  console.log(" ---------  ");
+  leastRecipes.forEach((recipe) => {
+    keepRecipe = 1;
     filteredRecipes.forEach((sublist) => {
-      if ((!recipe) in sublist) {
+      if (!sublist.includes(recipe)) {
         keepRecipe = 0;
       }
     });
     if (keepRecipe == 1) {
+      //  console.log("BARRED");
+      //  console.log(recipe);
       displayedCardsIds.push(+recipe);
     }
-    keepRecipe = 1;
   });
+  // console.log("YOYOYO" + displayedCardsIds);
   return displayedCardsIds;
 }
