@@ -2,18 +2,20 @@ import getFilteredRecipes from "./getFilteredRecipes";
 import { recipes } from "./recipes";
 import refreshFilters from "./refreshFilters";
 import updateTotalRecipes from "./totalRecipes";
+import getDisplayedCardsIds from "./getDisplayedCards";
+import refreshCards from "./refreshCards";
 
 export default async function evalMainInput() {
   const cards = document.querySelectorAll(".cardRecipe__article");
   const mainInputField = document.querySelector(".main-input-field");
   const displayedCardsIds = getDisplayedCardsIds();
-  // console.log(displayedCardsIds);
   const search = mainInputField.value.toLowerCase();
   const splitSearch = search.split(" ").filter((word) => word != "");
-  //console.log(splitSearch);
+  const idList = [];
   if (mainInputField.value == "" || mainInputField.value.length < 3) {
     checkNoFilter();
-    refreshFilters();
+    await refreshCards();
+    await refreshFilters();
     return;
   }
 
@@ -26,14 +28,8 @@ export default async function evalMainInput() {
       //console.log(normalizedRecipe);
       let found = searchWordsInContexts(splitSearch, normalizedRecipe);
       console.log(found);
-      if (!found) {
-        if (!DOMCard.classList.contains("hide")) {
-          DOMCard.classList.add("hide");
-        }
-      } else {
-        if (DOMCard.classList.contains("hide")) {
-          DOMCard.classList.remove("hide");
-        }
+      if (found) {
+        idList.push(+recipe.id);
       }
     }
   });
@@ -46,8 +42,9 @@ export default async function evalMainInput() {
     }
     updateTotalRecipes();
   }
+  refreshCards(idList);
   updateTotalRecipes();
-  refreshFilters();
+  refreshFilters(idList);
 }
 
 function makeIngredientContext(ingredientsObj) {
@@ -66,7 +63,7 @@ function searchWordsInContexts(words, contexts) {
     });
   });
 }
-
+/*
 function getDisplayedCardsIds() {
   const displayedCardsIds = [];
   const filteredRecipes = getFilteredRecipes();
@@ -78,12 +75,15 @@ function getDisplayedCardsIds() {
     }
     return displayedCardsIds;
   }
-  const mostRecipes = filteredRecipes.reduce((largest, current) => {
-    return current.length > largest.length ? current : largest;
-  }, filteredRecipes);
-  console.log(mostRecipes);
+  const leastRecipes = filteredRecipes.reduce((smallest, current) => {
+      if (smallest === null || current.length < smallest.length) {
+        return current;
+      }
+      return smallest;
+    }, null);
   let keepRecipe = 1;
-  mostRecipes.forEach((recipe) => {
+  leastRecipes.forEach((recipe) => {
+    keepRecipe = 1;
     filteredRecipes.forEach((sublist) => {
       if ((!recipe) in sublist) {
         keepRecipe = 0;
@@ -92,11 +92,10 @@ function getDisplayedCardsIds() {
     if (keepRecipe == 1) {
       displayedCardsIds.push(+recipe);
     }
-    keepRecipe = 1;
   });
   return displayedCardsIds;
 }
-
+*/
 function normalizeRecipe(recipe) {
   const normalizedRecipe = {
     name: recipe.name,

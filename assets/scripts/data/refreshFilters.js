@@ -1,6 +1,9 @@
+import getFilteredRecipes from "./getFilteredRecipes";
 import { recipes } from "./recipes";
+import getDisplayedCardsIds from "./getDisplayedCards";
+import refreshCards from "./refreshCards";
 
-export default function refreshFilters() {
+export default async function refreshFilters(idList) {
   //aggregate filter
   //display éè but treat them as e
   // if user enters accent, must look explicitely for it ???
@@ -13,9 +16,7 @@ export default function refreshFilters() {
 
   // This is a primitive refresh based on simple correspondance with displayed DOM...
   // I might improve it later
-  const displayedCards = document.querySelectorAll(
-    ".cardRecipe__article:not(.hide)",
-  );
+  //
   const ingredientsDropdown = document.querySelector(".ingredients-dropdown");
   const appareilsDropdown = document.querySelector(".appareils-dropdown");
   const ustensilesDropdown = document.querySelector(".ustensiles-dropdown");
@@ -37,74 +38,62 @@ export default function refreshFilters() {
   //const displayedIds = [];
 
   //  console.log(li_ingredients);
-  refreshList();
-  //adjust list items according to displayed cards
-  function refreshList() {
-    //  console.log(displayedCards);
-    displayedCards.forEach((card) => {
-      hideListItems(card.dataset.id);
-    });
+  //await refreshCards();
+  let displayedCards = getDisplayedCardsIds();
+  if (idList) {
+    displayedCards = idList;
+  }
+  //console.log(displayedCards);
+  const filteredRecipes = getFilteredRecipes();
+  //  console.log(displayedCards);
+  if (displayedCards.length == recipes.length) {
+    const allListItems = document.querySelectorAll(".list-item");
+    allListItems.forEach((item) => item.classList.remove("hide"));
+    return;
   }
 
-  //must make a function that adjust displayed cards according to active filters
-  //this one is important for filter removals
-  // in refreshcards
-
-  function hideListItems(id) {
-    const regex = new RegExp(`(^|-)${id}($|-)`);
-    const activeFilters = document.querySelector(
-      ".sectionRecipes__applied-tag",
-    );
-    if (!activeFilters && recipes.length == displayedCards.length) {
-      const allListItems = document.querySelectorAll(".list-item");
-      allListItems.forEach((item) => item.classList.remove("hide"));
-      return;
-    }
-
-    //console.log("call hidelist");
-    li_ingredients.forEach((li) => {
-      if (li.classList.contains("hide")) {
-        if (regex.test(li.dataset.recipes)) {
-          li.classList.remove("hide");
-        }
+  li_ingredients.forEach((li) => {
+    const li_recipes = li.dataset.recipes.split("-");
+    let contained = 0;
+    li_recipes.forEach((recipe) => {
+      if (displayedCards.includes(+recipe)) {
+        contained = 1;
+        li.classList.remove("hide");
       } else {
-        if (!regex.test(li.dataset.recipes)) {
+        if (contained == 0) {
           li.classList.add("hide");
-          //  li.style.backgroundColor = "Red";
         }
       }
     });
-    li_appareils.forEach((li) => {
-      if (li.classList.contains("hide")) {
-        if (regex.test(li.dataset.recipes)) {
-          li.classList.remove("hide");
-        }
-      } else {
-        if (!regex.test(li.dataset.recipes)) {
-          li.classList.add("hide");
-          //  li.style.backgroundColor = "Red";
-        }
-      }
-    });
-    li_ustensiles.forEach((li) => {
-      if (li.classList.contains("hide")) {
-        if (regex.test(li.dataset.recipes)) {
-          li.classList.remove("hide");
-        }
-      } else {
-        if (!regex.test(li.dataset.recipes)) {
-          li.classList.add("hide");
-          //  li.style.backgroundColor = "Red";
-        }
-      }
-    });
-  }
+  });
 
-  const idSelected = document.querySelectorAll(".cardRecipe__article[data-id]");
-  //  console.log(idSelected);
-  idSelected.forEach((sel) => {
-    if (sel.dataset.id == 1) {
-      //  console.log(sel.dataset.id);
-    }
+  li_appareils.forEach((li) => {
+    const li_recipes = li.dataset.recipes.split("-");
+    let contained = 0;
+    li_recipes.forEach((recipe) => {
+      if (displayedCards.includes(+recipe)) {
+        contained = 1;
+        li.classList.remove("hide");
+      } else {
+        if (contained == 0) {
+          li.classList.add("hide");
+        }
+      }
+    });
+  });
+
+  li_ustensiles.forEach((li) => {
+    const li_recipes = li.dataset.recipes.split("-");
+    let contained = 0;
+    li_recipes.forEach((recipe) => {
+      if (displayedCards.includes(+recipe)) {
+        contained = 1;
+        li.classList.remove("hide");
+      } else {
+        if (contained == 0) {
+          li.classList.add("hide");
+        }
+      }
+    });
   });
 }

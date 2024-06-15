@@ -1,14 +1,14 @@
+import getFilteredRecipes from "./getFilteredRecipes";
 import refreshFilters from "./refreshFilters";
 
 export default async function filtersInput(field) {
-  const displayedCards = document.querySelectorAll(
-    ".cardRecipe__article:not(.hide)",
-  );
-  const activeFilters = document.querySelectorAll(
-    ".sectionRecipes__applied-tag",
-  );
+  await refreshFilters();
+  const filteredRecipes = getFilteredRecipes();
+  //console.log(field);
   const currentList = field.closest("ul");
-  const currentListElements = currentList.querySelectorAll(".list-item");
+  const currentListElements = currentList.querySelectorAll(
+    ".list-item:not(.hide)",
+  );
   const normalizedInput = field.value.toLowerCase();
 
   currentListElements.forEach((elem) => {
