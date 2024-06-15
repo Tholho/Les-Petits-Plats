@@ -1,11 +1,15 @@
-import { recipes } from "./data/recipes.js";
-import makeAllDOM from "./data/data1.js";
+import makeAllDOM from "./data/dataInit.js";
 import evalMainInput from "./data/mainFilterInput.js";
 import filtersInput from "./data/filtersInput.js";
 import updateTotalRecipes from "./data/totalRecipes.js";
 
-console.log(recipes);
-makeAllDOM();
+async function init() {
+  await makeAllDOM();
+  searchFieldSetup();
+  setupCustomDropdown();
+}
+
+init();
 
 function searchFieldSetup() {
   const formFields = document.querySelectorAll(".form-field input");
@@ -80,10 +84,3 @@ function setupCustomDropdown() {
     paragraph.removeEventListener("click", hideCustomDropdown);
   }
 }
-
-async function init() {
-  searchFieldSetup();
-  setupCustomDropdown();
-}
-
-init();
