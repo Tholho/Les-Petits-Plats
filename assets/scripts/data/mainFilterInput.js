@@ -3,6 +3,7 @@ import { recipes } from "./recipes";
 import refreshCards from "./refreshCards";
 import refreshFilters from "./refreshFilters";
 import updateTotalRecipes from "./totalRecipes";
+import normalizeAndLowerCase from "../utils/normalizeAndLowerCase";
 
 export default async function evalMainInput() {
   const allCardsCount = recipes.length;
@@ -162,14 +163,6 @@ function normalizeRecipe(recipe) {
     makeIngredientContext(recipe.ingredients),
   );
   return normalizedRecipe;
-}
-
-function normalizeAndLowerCase(str) {
-  return removeAccents(str).toLowerCase();
-}
-
-function removeAccents(str) {
-  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
 function customStrStr(stack, needle) {
