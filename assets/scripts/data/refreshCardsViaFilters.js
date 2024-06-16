@@ -1,6 +1,7 @@
 import refreshFilters from "./refreshFilters";
 import refreshCards from "./refreshCards";
 import updateTotalRecipes from "./totalRecipes";
+import evalMainInput from "./mainFilterInput";
 
 export default async function refreshCardsViaFilters() {
   const sortingGroup = document.querySelector(".sortingGroup");
@@ -40,6 +41,7 @@ export default async function refreshCardsViaFilters() {
     refreshCards();
     await refreshFilters();
     updateTotalRecipes();
+    evalMainInput();
   }
 
   async function createTag(tagname, recipes, id) {
@@ -106,5 +108,6 @@ export default async function refreshCardsViaFilters() {
     refreshCards();
     await refreshFilters();
     updateTotalRecipes();
+    evalMainInput();
   }
 }
