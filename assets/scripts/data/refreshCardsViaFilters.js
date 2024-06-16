@@ -46,22 +46,10 @@ export default async function refreshCardsViaFilters() {
       const tag_clear = tag.querySelector("svg");
       tag_clear.addEventListener("click", removeFilter);
     }
-    /*
-    articles.forEach((article) => {
-      const regex = new RegExp(`(^|-)${article.dataset.id}($|-)`);
-      if (!article.classList.contains("hide")) {
-        if (!regex.test(this.dataset.recipes)) {
-          //   console.log(article);
-          //     console.log("test");
-          article.classList.add("hide");
-        }
-      }
-    });
-    */
     refreshCards();
     await refreshFilters();
-    // evalMainInput();
     updateTotalRecipes();
+    evalMainInput();
   }
 
   async function createTag(tagname, recipes, id) {
@@ -129,16 +117,6 @@ export default async function refreshCardsViaFilters() {
     refreshCards();
     await refreshFilters();
     updateTotalRecipes();
-    // evalMainInput();
-    /* checkNoFilter();
-  function checkNoFilter() {
-    const activeFilters = document.querySelector(
-      ".sectionRecipes__applied-tag",
-    );
-    if (!activeFilters) {
-      cards.forEach((card) => card.classList.remove("hide"));
-    }
-  }
-  */
+    evalMainInput();
   }
 }

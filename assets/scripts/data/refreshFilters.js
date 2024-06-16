@@ -1,22 +1,8 @@
 import getFilteredRecipes from "./getFilteredRecipes";
 import { recipes } from "./recipes";
 import getDisplayedCardsIds from "./getDisplayedCards";
-import refreshCards from "./refreshCards";
 
 export default async function refreshFilters(idList) {
-  //aggregate filter
-  //display éè but treat them as e
-  // if user enters accent, must look explicitely for it ???
-  //
-  // How to generate tags ? FROM RECIPES ? hard to modify mais independant du DOM
-  // C'est le mieux je pense(05/06)
-  //
-  //
-  // MUST ADD ".sortingList__item__selected" TO ACTIVE TAGS TO TRIGGER REORDER
-
-  // This is a primitive refresh based on simple correspondance with displayed DOM...
-  // I might improve it later
-  //
   const ingredientsDropdown = document.querySelector(".ingredients-dropdown");
   const appareilsDropdown = document.querySelector(".appareils-dropdown");
   const ustensilesDropdown = document.querySelector(".ustensiles-dropdown");
@@ -35,17 +21,10 @@ export default async function refreshFilters(idList) {
     "li:not(.sortingList__input-field)",
   );
 
-  //const displayedIds = [];
-
-  //  console.log(li_ingredients);
-  //await refreshCards();
   let displayedCards = getDisplayedCardsIds();
   if (idList) {
     displayedCards = idList;
   }
-  //console.log(displayedCards);
-  const filteredRecipes = getFilteredRecipes();
-  //  console.log(displayedCards);
   if (displayedCards.length == recipes.length) {
     const allListItems = document.querySelectorAll(".list-item");
     allListItems.forEach((item) => item.classList.remove("hide"));
@@ -96,31 +75,4 @@ export default async function refreshFilters(idList) {
       }
     });
   });
-
-  /*
-      li_appareils.forEach((li) => {
-        if (li.classList.contains("hide")) {
-          if (regex.test(li.dataset.recipes)) {
-            li.classList.remove("hide");
-          }
-        } else {
-          if (!regex.test(li.dataset.recipes)) {
-            li.classList.add("hide");
-            //  li.style.backgroundColor = "Red";
-          }
-        }
-      });
-      li_ustensiles.forEach((li) => {
-        if (li.classList.contains("hide")) {
-          if (regex.test(li.dataset.recipes)) {
-            li.classList.remove("hide");
-          }
-        } else {
-          if (!regex.test(li.dataset.recipes)) {
-            li.classList.add("hide");
-            //  li.style.backgroundColor = "Red";
-          }
-        }
-      });
-      */
 }

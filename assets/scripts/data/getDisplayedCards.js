@@ -6,14 +6,11 @@ export default function getDisplayedCardsIds() {
   const filteredRecipes = getFilteredRecipes();
   if (filteredRecipes.length == 0) {
     let total = recipes.length;
-    // console.log(total);
     for (let i = 1; i <= +total; i++) {
       displayedCardsIds.push(+i);
     }
-    // console.log(displayedCardsIds);
     return displayedCardsIds;
   }
-  console.log(filteredRecipes);
   const leastRecipes = filteredRecipes.reduce((smallest, current) => {
     if (smallest < 1 || current.length < smallest.length) {
       return current;
@@ -21,10 +18,6 @@ export default function getDisplayedCardsIds() {
     return smallest;
   }, null);
   let keepRecipe = 1;
-  console.log(" ---------  ");
-  console.log(leastRecipes);
-  console.log(filteredRecipes);
-  console.log(" ---------  ");
   leastRecipes.forEach((recipe) => {
     keepRecipe = 1;
     filteredRecipes.forEach((sublist) => {
@@ -33,11 +26,8 @@ export default function getDisplayedCardsIds() {
       }
     });
     if (keepRecipe == 1) {
-      //  console.log("BARRED");
-      //  console.log(recipe);
       displayedCardsIds.push(+recipe);
     }
   });
-  // console.log("YOYOYO" + displayedCardsIds);
   return displayedCardsIds;
 }
