@@ -5,6 +5,7 @@ import refreshFilters from "./refreshFilters";
 import updateTotalRecipes from "./totalRecipes";
 import normalizeAndLowerCase from "../utils/normalizeAndLowerCase";
 
+//Main search user input logic
 export default async function evalMainInput() {
   const allCardsCount = recipes.length;
   const cards = document.querySelectorAll(".cardRecipe__article");
