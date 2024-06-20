@@ -14,9 +14,9 @@ export default async function evalMainInput() {
   const splitSearch = customSplit(search);
   const idList = [];
   if (mainInputField.value == "" || mainInputField.value.length < 3) {
-    checkNoFilter();
     await refreshCards();
     await refreshFilters();
+    updateTotalRecipes();
     return;
   }
 
@@ -31,24 +31,12 @@ export default async function evalMainInput() {
     }
     i++;
   }
-  function checkNoFilter() {
-    const activeFilters = document.querySelector(
-      ".sectionRecipes__applied-tag",
-    );
-    if (!activeFilters) {
-      let i = 0;
-      while (i < allCardsCount) {
-        cards[i].classList.remove("hide");
-        i++;
-      }
-    }
-    updateTotalRecipes();
-  }
   refreshCards(idList);
   updateTotalRecipes();
   refreshFilters(idList);
 }
 
+//From user input, makes an array of string with each containing a single word
 function customSplit(search) {
   let i = 0;
   let k = 0;
@@ -68,6 +56,7 @@ function customSplit(search) {
   return splitSearch;
 }
 
+//Transforms ingredients in a single string to facilitate search
 function makeIngredientContext(ingredientsObj) {
   let ingredientNames = "";
   let i = 0;
@@ -78,6 +67,7 @@ function makeIngredientContext(ingredientsObj) {
   return ingredientNames;
 }
 
+//Will look for each word in each context iteratively, returns true if each words exists in at least one context, else false
 function searchWordsInContexts(words, contexts) {
   let found = false;
   let i = 0;
@@ -96,6 +86,7 @@ function searchWordsInContexts(words, contexts) {
   return found;
 }
 
+//Returns a list of unique ids of recipes that all filters allow
 function getDisplayedCardsIdsLocal() {
   const displayedCardsIds = [];
   const filteredRecipes = getFilteredRecipes();
@@ -128,6 +119,7 @@ function getDisplayedCardsIdsLocal() {
   return displayedCardsIds;
 }
 
+//The tag with the least recipe is the most discriminant one, uses it to check if other tags allow it.
 function customReduce(recipes) {
   if (!recipes) {
     return [];
@@ -152,6 +144,7 @@ function customReduce(recipes) {
   return smallestRecipe;
 }
 
+//creates normalized contexts to make search easier, one of them allows for user input with accents, another without
 function normalizeRecipe(recipe) {
   let normalizedRecipe = [];
   normalizedRecipe[0] = recipe.name;
@@ -165,6 +158,7 @@ function normalizeRecipe(recipe) {
   return normalizedRecipe;
 }
 
+//Char by char search for needle (word) inside stack (usually a larger string)
 function customStrStr(stack, needle) {
   if (needle === "") {
     return false;

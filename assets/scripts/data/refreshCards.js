@@ -1,5 +1,6 @@
 import getDisplayedCardsIds from "./getDisplayedCards";
 
+//Hides or displays cards depending on filters if no idList is given, else gives result of search + filters
 export default function refreshCards(idList) {
   const cards = document.querySelectorAll(".cardRecipe__article");
   if (!idList) {

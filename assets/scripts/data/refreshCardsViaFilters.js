@@ -1,27 +1,11 @@
 import refreshFilters from "./refreshFilters";
-import getFilteredRecipes from "./getFilteredRecipes";
 import evalMainInput from "./mainFilterInput";
 import refreshCards from "./refreshCards";
 import updateTotalRecipes from "./totalRecipes";
 
+//Updates DOM visually upon user actions on filters
 export default async function refreshCardsViaFilters() {
-  const cards = document.querySelectorAll(".cardRecipe__article");
   const sortingGroup = document.querySelector(".sortingGroup");
-  const filtersButtons = document.querySelectorAll(".dropdownBtn");
-  const articles = document.querySelectorAll(".cardRecipe__article");
-
-  const ingredientsDropdown = document.querySelector(".ingredients-dropdown");
-  const appareilsDropdown = document.querySelector(".appareils-dropdown");
-  const ustensilesDropdown = document.querySelector(".ustensiles-dropdown");
-
-  const ul_ingredients = ingredientsDropdown.querySelector("ul");
-  const ul_appareils = appareilsDropdown.querySelector("ul");
-  const ul_ustensiles = ustensilesDropdown.querySelector("ul");
-
-  const li_ingredients = ul_ingredients.querySelectorAll("li");
-  const li_appareils = ul_appareils.querySelectorAll("li");
-  const li_ustensiles = ul_ustensiles.querySelectorAll("li");
-
   const filters_items = sortingGroup.querySelectorAll(
     "li:not(.sortingList__input-field)",
   );
@@ -29,6 +13,8 @@ export default async function refreshCardsViaFilters() {
   filters_items.forEach((item) => {
     item.addEventListener("click", applyFilter);
   });
+
+  //If user selects a list item, will both call create tag and make it unselectable in both list and tag section.
   async function applyFilter() {
     this.classList.add("sortingList__item__selected");
     const svg = this.querySelector("svg");
@@ -52,6 +38,7 @@ export default async function refreshCardsViaFilters() {
     evalMainInput();
   }
 
+  //Upon user selection, displays given tag.
   async function createTag(tagname, recipes, id) {
     const tag_section = document.querySelector(".sectionRecipes__tags-section");
     const tag = document.createElement("p");
@@ -87,7 +74,6 @@ export default async function refreshCardsViaFilters() {
 
   //remove visual effects from list and tags and refresh cards depending on
   //active filters
-
   async function removeFilter(event) {
     event.stopPropagation();
     if (this.parentNode.nodeName == "LI") {

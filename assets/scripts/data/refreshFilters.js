@@ -2,6 +2,7 @@ import getFilteredRecipes from "./getFilteredRecipes";
 import { recipes } from "./recipes";
 import getDisplayedCardsIds from "./getDisplayedCards";
 
+//Updates filters items depending on displayed recipes
 export default async function refreshFilters(idList) {
   const ingredientsDropdown = document.querySelector(".ingredients-dropdown");
   const appareilsDropdown = document.querySelector(".appareils-dropdown");

@@ -1,6 +1,7 @@
 import refreshFilters from "./refreshFilters";
 import removeAccents from "../utils/removeAccents";
 
+//Dynamic display of list elements depending on user input
 export default async function filtersInput(field) {
   await refreshFilters();
   const currentList = field.closest("ul");
