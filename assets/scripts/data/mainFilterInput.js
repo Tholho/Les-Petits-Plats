@@ -5,6 +5,7 @@ import getDisplayedCardsIds from "./getDisplayedCards";
 import refreshCards from "./refreshCards";
 import normalizeAndLowerCase from "../utils/normalizeAndLowerCase";
 
+//Main search user input logic
 export default async function evalMainInput() {
   const cards = document.querySelectorAll(".cardRecipe__article");
   const mainInputField = document.querySelector(".main-input-field");
@@ -42,6 +43,7 @@ export default async function evalMainInput() {
   refreshFilters(idList);
 }
 
+//Transforms ingredients in a single string to facilitate search
 function makeIngredientContext(ingredientsObj) {
   const ingredientArray = ingredientsObj.map(
     (ingredient) => ingredient.ingredient,
@@ -50,6 +52,7 @@ function makeIngredientContext(ingredientsObj) {
   return ingredientNames;
 }
 
+//Will look for each word in each context iteratively, returns true if each words exists in at least one context, else false
 function searchWordsInContexts(words, contexts) {
   return words.every((word) => {
     return Object.values(contexts).some((contextValue) => {
@@ -58,6 +61,7 @@ function searchWordsInContexts(words, contexts) {
   });
 }
 
+//creates normalized contexts to make search easier, one of them allows for user input with accents, another without
 function normalizeRecipe(recipe) {
   const normalizedRecipe = {
     name: recipe.name,

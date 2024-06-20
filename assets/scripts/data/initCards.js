@@ -1,5 +1,6 @@
 import { recipes } from "./recipes";
 
+//DOM for recipes
 export default async function initCards() {
   const cardArea = document.querySelector(".sectionRecipes__cardArea");
   const recipeTotal = document.querySelector(".sectionRecipes__recipe-total");

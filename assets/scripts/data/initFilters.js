@@ -1,5 +1,6 @@
 import { recipes } from "./recipes";
 
+//Filters DOM generation
 export default async function initFilters() {
   // useful DOM elements
   const ingredientsDropdown = document.querySelector(".ingredients-dropdown");

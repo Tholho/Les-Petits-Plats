@@ -1,3 +1,4 @@
+//Updates recipes count display
 export default function updateTotalRecipes() {
   const cards = document.querySelectorAll(".cardRecipe__article");
   const recipeTotal = document.querySelector(".sectionRecipes__recipe-total");

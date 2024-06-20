@@ -2,6 +2,10 @@ import makeAllDOM from "./data/dataInit.js";
 import evalMainInput from "./data/mainFilterInput.js";
 import filtersInput from "./data/filtersInput.js";
 import updateTotalRecipes from "./data/totalRecipes.js";
+import refreshCards from "./data/refreshCards.js";
+import refreshFilters from "./data/refreshFilters.js";
+
+init();
 
 async function init() {
   await makeAllDOM();
@@ -9,8 +13,7 @@ async function init() {
   setupCustomDropdown();
 }
 
-init();
-
+//Allows field clearing and lays out the logic for user inputs in all fields
 function searchFieldSetup() {
   const formFields = document.querySelectorAll(".form-field input");
   formFields.forEach(
@@ -22,7 +25,9 @@ function searchFieldSetup() {
           svgclear.onclick = function () {
             field.value = "";
             svgclear.style.display = "none";
-            checkNoFilter();
+            refreshCards();
+            refreshFilters();
+            updateTotalRecipes();
           };
         } else {
           svgclear.style.display = "none";
@@ -36,15 +41,7 @@ function searchFieldSetup() {
   );
 }
 
-function checkNoFilter() {
-  const cards = document.querySelectorAll(".cardRecipe__article");
-  const activeFilters = document.querySelector(".sectionRecipes__applied-tag");
-  if (!activeFilters) {
-    cards.forEach((card) => card.classList.remove("hide"));
-  }
-  updateTotalRecipes();
-}
-
+//Sets up the dropdown visual changes when user interacts allowing for list display and icon dynamic
 function setupCustomDropdown() {
   const customDropdown = document.querySelectorAll(".dropdownBtn");
 
@@ -58,6 +55,8 @@ function setupCustomDropdown() {
     customDropdown.classList.add("displayed");
     setAngleUp(currentDropdown);
   }
+
+  //icon interactivity
   function setAngleUp(target) {
     const angle = target.querySelector("i");
     const paragraph = target.querySelector(".dropdownBtn__title");
@@ -66,6 +65,7 @@ function setupCustomDropdown() {
     angle.addEventListener("click", hideCustomDropdown);
     paragraph.addEventListener("click", hideCustomDropdown);
   }
+
   async function hideCustomDropdown(e) {
     e.stopPropagation();
     const currentDropdown = e.target.closest(".dropdownBtn");

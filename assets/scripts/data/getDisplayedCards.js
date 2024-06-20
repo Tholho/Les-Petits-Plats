@@ -1,6 +1,7 @@
 import getFilteredRecipes from "./getFilteredRecipes";
 import { recipes } from "./recipes";
 
+//Returns a list of unique ids of recipes that all filters allow
 export default function getDisplayedCardsIds() {
   const displayedCardsIds = [];
   const filteredRecipes = getFilteredRecipes();
