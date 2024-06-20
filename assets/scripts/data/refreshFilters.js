@@ -1,4 +1,3 @@
-import getFilteredRecipes from "./getFilteredRecipes";
 import { recipes } from "./recipes";
 import getDisplayedCardsIds from "./getDisplayedCards";
 
