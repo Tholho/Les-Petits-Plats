@@ -4,14 +4,6 @@
   font-style: normal;
 }
 
-/*
-.manrope-default {
-    font-family: "Manrope", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-}
-*/
 /* dynamic filtered display classes */
 .hide {
   display: none;
@@ -33,7 +25,6 @@
 body {
   margin: 0;
   font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
@@ -285,7 +276,6 @@ header .logo h1 {
 .sectionRecipes__cardArea {
   display: flex;
   flex-flow: wrap;
-  justify-items: space-around;
   pointer-events: none;
 }
 
@@ -321,7 +311,7 @@ header .logo h1 {
 }
 .cardRecipe__article-title {
   font-size: 1.125rem;
-  margin: 30px 0px;
+  margin: 20px 0px;
 }
 .cardRecipe__article-subtitle {
   margin: 10px 0px;
@@ -339,12 +329,12 @@ header .logo h1 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 0px;
+  grid-column-gap: 20px;
 }
 .cardRecipe__article dl > div {
   display: flex;
   flex-flow: column;
-  justify-items: start;
-  margin: 10px 0px;
+  margin: 5px 0px;
 }
 .cardRecipe__article dl > div * {
   margin: 0;
